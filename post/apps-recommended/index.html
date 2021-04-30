@@ -1,0 +1,543 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>装机用所有软件合集 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    装机用所有软件合集
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-06-16 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/Qrkgq0Jdy/" class="post-tags">
+                            # Software
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/6KHiJEdvJL/" class="post-tags">
+                            # Windows
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>下面的文章列出了电脑中必备的一些软件，标注了其官网或者可靠的下载方式</p>
+<!-- more -->
+<p>下载方式主要分为三种（按喜好程度排序）：</p>
+<ol>
+<li>Scoop/Chocolatey下载</li>
+<li>微软应用商店UWP下载</li>
+<li>传统官网x64/x86下载</li>
+<li>和谐版下载</li>
+</ol>
+<h2 id="scoop与chocolatey">Scoop与Chocolatey</h2>
+<p>Scoop与Chocolatey是我最近发现的用于Windows的包管理工具，相当于Ubuntu中的apt-get；Chocolatey是更早的包管理工具，商业软件。两者的区别是前者将软件安装在用户文件夹下，后者将软件安装在Program Files文件夹中。<em>Chocolatey安装软件不会生成快捷方式</em>（均可更改，复杂）</p>
+<p>**目前遵循Scoop优于Chocolatey安装的原则，特殊软件除外 **</p>
+<blockquote>
+<p>打开 PowerShell</p>
+<p>在 PowerShell 中输入下面内容，保证允许本地脚本的执行：</p>
+<p><code>set-executionpolicy remotesigned -scope currentuser</code></p>
+<p>然后执行下面的命令安装 Scoop：</p>
+<p><code>iex (new-object net.webclient).downloadstring('https://get.scoop.sh')</code></p>
+<p>静待脚本执行完成就可以了，安装成功后，让我们尝试一下： <code>scoop help</code></p>
+<p>搜索软件使用：<code>scoop search *</code></p>
+<p>安装软件使用：<code>scoop install *</code></p>
+<hr>
+<p>同理安装Chocolatey</p>
+<p><code>Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://Chocolatey.org/install.ps1'))</code></p>
+</blockquote>
+<h3 id="一键安装命令">一键安装命令</h3>
+<p>原则：Scoop中有就不使用Chocolatey<br>
+首先开启全局翻墙，然后使用Scoop安装7zip, git与sudo</p>
+<pre><code class="language-powershell">scoop install 7zip git sudo
+</code></pre>
+<p>然后安装extra仓库</p>
+<pre><code class="language-powershell">scoop bucket add extras
+scoop bucket add Ash258 'https://github.com/Ash258/scoop-Ash258.git'
+</code></pre>
+<p>最后执行一键命令</p>
+<pre><code class="language-powershell"># 已经经过测试可用的各个软件，有些软件可用scoop，但不适合
+scoop install 7zip anydesk aria2 aria-ng-gui captura dismplusplus freedownloadmanager geekuninstaller git goldendict innounp mobaxterm pandownload putty pycharm rufus screentogif sudo teamviewer trafficmonitor typora vncviewer vscode xmind8
+sudo choco install --yes raidrive fluent-terminal sandboxie logitechoptions vmwareworkstation qtranslate
+</code></pre>
+<p>最后执行一键命令</p>
+<pre><code class="language-powershell"># 已经经过测试可用的各个软件，有些软件可用scoop，但不适合
+scoop install 7zip anydesk aria2 aria-ng-gui captura dismplusplus freedownloadmanager geekuninstaller git goldendict innounp mobaxterm pandownload putty pycharm rufus screentogif sudo teamviewer trafficmonitor typora vncviewer vscode xmind8
+sudo choco install --yes raidrive fluent-terminal sandboxie logitechoptions vmwareworkstation qtranslate
+</code></pre>
+<h2 id="常用软件">常用软件</h2>
+<h3 id="网上冲浪">网上冲浪</h3>
+<h4 id="google-chrome"><a href="https://www.google.com/chrome/">Google Chrome</a></h4>
+<p>最好用的浏览器，没有之一，配合谷歌账户使用效果更佳，所用插件直接登陆账号后恢复</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-7812090"><label class="task-list-item-label" for="task-item-7812090"> Scoop/Chocolatey (googlechrome)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4748098"><label class="task-list-item-label" for="task-item-4748098"> x64</label></li>
+</ul>
+<h4 id="v2ray"><a href="https://github.com/2dust/v2rayN/releases">V2ray</a></h4>
+<p>Internet访问工具，墙不平何以平天下</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-2577680"><label class="task-list-item-label" for="task-item-2577680"> Scoop (v2rayn)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-3819774"><label class="task-list-item-label" for="task-item-3819774"> x64</label></li>
+</ul>
+<h3 id="解压缩">解压缩</h3>
+<h4 id="bandizip"><a href="https://cn.bandisoft.com/bandizip/">Bandizip</a></h4>
+<p>解压缩软件，界面美观无广告（7.x 版本之前免费，官网有 <a href="https://cn.bandisoft.com/bandizip/old/6/">老版本</a> 链接）</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1478984"><label class="task-list-item-label" for="task-item-1478984"> Scoop/Chocolatey (bandizip)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-7603769"><label class="task-list-item-label" for="task-item-7603769"> x64</label></li>
+</ul>
+<h4 id="7z"><a href="https://www.7-zip.org/">7z</a></h4>
+<p>开源的解压缩软件，功能很强但是丑，可以进行简单的美化，详见少数派这篇文章：<a href="https://sspai.com/post/58130">如何让简陋的 7-Zip 的界面现代化</a> 。</p>
+<h3 id="即时通讯">即时通讯</h3>
+<h4 id="tim"><a href="https://office.qq.com/index.html">Tim</a> / <a href="https://weixin.qq.com/">微信</a></h4>
+<p>桌面端TIM简洁好用，没有QQ的“丰富”的内容与广告，适合专注通信与协作。UWP版微信已经停更，还是使用官网下载的版本吧。</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1051313"><label class="task-list-item-label" for="task-item-1051313"> 微软应用商店UWP安装</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8552243"><label class="task-list-item-label" for="task-item-8552243"> x64</label></li>
+</ul>
+<h4 id="telegram">Telegram</h4>
+<p>被墙的即时通讯软件，安卓端与桌面端的开发都很规范，干翻 QQ 微信之流。</p>
+<h3 id="办公写作">办公写作</h3>
+<h4 id="typora"><a href="https://typora.io/">Typora</a></h4>
+<p>Markdown写作软件，本文由Typora完成，配合Pandoc可进行不同格式的导出</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-165710"><label class="task-list-item-label" for="task-item-165710"> Scoop/Chocolatey (typora)  （测试发现装不上）</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-9937175"><label class="task-list-item-label" for="task-item-9937175"> x64</label></li>
+</ul>
+<h4 id="gridea"><a href="https://gridea.dev/">Gridea</a></h4>
+<p>Gridea 是一个静态博客写作客户端，帮助你更容易地构建并管理博客或任何静态站点。目前我的 <a href="https://193824.xyz">博客</a> 就是使用 Gridea 搭建在 GitHub Pages 上</p>
+<h4 id="sumatra-pdf"><a href="https://www.sumatrapdfreader.org/free-pdf-reader.html">Sumatra PDF</a></h4>
+<p>极简PDF阅读器，有效阅读面积大，没有批注等功能</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-9484848"><label class="task-list-item-label" for="task-item-9484848"> Scoop/Chocolatey (sumatrapdf)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1971206"><label class="task-list-item-label" for="task-item-1971206"> x64</label></li>
+</ul>
+<h4 id="microsoft-365">Microsoft 365</h4>
+<p>Office 订阅制产品，原名 Office 365，功能强大，可使用 <a href="https://otp.landian.vip/zh-cn/">Office Tool Plus</a> 进行自定义组件安装，日常仅需 Word，Excel，PowerPoint 三个组件</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-9310872"><label class="task-list-item-label" for="task-item-9310872"> x64</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-7642830"><label class="task-list-item-label" for="task-item-7642830"> 和谐版</label></li>
+</ul>
+<h4 id="microsoft-to-do">Microsoft To Do</h4>
+<p>Todo软件，可与安卓端联动</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4795121"><label class="task-list-item-label" for="task-item-4795121"> 微软应用商店</label></li>
+</ul>
+<h4 id="yomail">Yomail</h4>
+<p>邮件应用，已经凉了，但是还能用</p>
+<h4 id="网易邮箱大师"><a href="https://mail.163.com/dashi/">网易邮箱大师</a></h4>
+<p>目前在用，界面好看，还算稳定</p>
+<h4 id="goldendict"><a href="https://sourceforge.net/projects/goldendict/">GoldenDict</a> / <a href="https://quest-app.appspot.com/">QTranslate</a></h4>
+<p>开源的词典软件，可屏幕取词，后者更加轻量，但不支持字典</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4997060"><label class="task-list-item-label" for="task-item-4997060"> Scoop/Chocolatey (goldendict)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6662530"><label class="task-list-item-label" for="task-item-6662530"> Chocolatey (qtranslate)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6698253"><label class="task-list-item-label" for="task-item-6698253"> x64</label></li>
+</ul>
+<h3 id="图像视频">图像视频</h3>
+<h4 id="potplayer"><a href="https://potplayer.daum.net/">Potplayer</a></h4>
+<p>功能强大，皮肤自定义，在用Zune皮肤</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-2794171"><label class="task-list-item-label" for="task-item-2794171"> Scoop/Chocolatey (potplayer)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4143587"><label class="task-list-item-label" for="task-item-4143587"> x64</label></li>
+</ul>
+<h4 id="screentogif"><a href="https://www.screentogif.com/?l=zh_cn">ScreenToGif</a></h4>
+<p>体积极小的录屏转Gif的软件，有安装版和绿色版，开源</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-5490104"><label class="task-list-item-label" for="task-item-5490104"> Scoop/Chocolatey (screentogif)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1454780"><label class="task-list-item-label" for="task-item-1454780"> x64</label></li>
+</ul>
+<h4 id="captura"><a href="https://github.com/MathewSachin/Captura">Captura</a></h4>
+<p>专业的录屏软件，可调整帧率与质量</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-5598477"><label class="task-list-item-label" for="task-item-5598477"> Scoop/Chocolatey (captura)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-9470771"><label class="task-list-item-label" for="task-item-9470771"> x64</label></li>
+</ul>
+<h4 id="honeyview"><a href="https://www.bandisoft.com/honeyview/">Honeyview</a></h4>
+<p>专业的看图软件，可为PSD文件生成缩略图，查看psd图像</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-3829934"><label class="task-list-item-label" for="task-item-3829934"> Scoop/Chocolatey (honeyview)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1030865"><label class="task-list-item-label" for="task-item-1030865"> x64</label></li>
+</ul>
+<h4 id="adobe全家桶">Adobe全家桶</h4>
+<p>Photoshop，Premier Pro，Acrobat DC等</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8164828"><label class="task-list-item-label" for="task-item-8164828"> 和谐版</label></li>
+</ul>
+<h3 id="效率工具">效率工具</h3>
+<h4 id="listary"><a href="https://www.listary.com/">Listary</a></h4>
+<p>文件搜索神器，也许逐渐会被windows搜索替代，目前的开发版开始适配高分屏</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-5345115"><label class="task-list-item-label" for="task-item-5345115"> Scoop/Chocolatey (listary)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-874857"><label class="task-list-item-label" for="task-item-874857"> x64</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-7671152"><label class="task-list-item-label" for="task-item-7671152"> Listary Pro有和谐版</label></li>
+</ul>
+<h4 id="snipaste"><a href="https://zh.snipaste.com/">Snipaste</a></h4>
+<p>方便快捷的截图贴图软件，可自定义截图快捷键，开源</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1962860"><label class="task-list-item-label" for="task-item-1962860"> 微软应用商店UWP安装，实际上是转制版本</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1097819"><label class="task-list-item-label" for="task-item-1097819"> Scoop</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-4647581"><label class="task-list-item-label" for="task-item-4647581"> x64</label></li>
+</ul>
+<h4 id="trafficmonitor"><a href="https://github.com/zhongyang219/TrafficMonitor">TrafficMonitor</a></h4>
+<p>网速监控悬浮窗软件，内嵌到任务栏，开源</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4874906"><label class="task-list-item-label" for="task-item-4874906"> Scoop (trafficmonitor)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6911501"><label class="task-list-item-label" for="task-item-6911501"> x64</label></li>
+</ul>
+<h4 id="calibre"><a href="https://calibre-ebook.com/">Calibre</a></h4>
+<p>Kindle配套的电子书管理软件，泡面警告</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-9060697"><label class="task-list-item-label" for="task-item-9060697"> Scoop/Chocolatey (calibre)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-7493133"><label class="task-list-item-label" for="task-item-7493133"> x64</label></li>
+</ul>
+<h3 id="文件同步">文件同步</h3>
+<h4 id="坚果云"><a href="https://www.jianguoyun.com/d/home#/">坚果云</a></h4>
+<p>科研笔记以及文档备份等用途</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-445968"><label class="task-list-item-label" for="task-item-445968"> x64</label></li>
+</ul>
+<h4 id="onedrive">OneDrive</h4>
+<p>Windows 系统自带，开通 Microsoft 365 之后空间扩展至 1T，与 Office 系列软件完美联动。不开会员也可以通过万能的某宝将空间扩展至 15G</p>
+<h3 id="远程访问">远程访问</h3>
+<h4 id="teamviewer"><a href="https://www.teamviewer.cn/cn/">TeamViewer</a></h4>
+<p>远程访问工具，TeamViewer老牌，被国内垃圾代理商代理，现已难用至极</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8210210"><label class="task-list-item-label" for="task-item-8210210"> Scoop/Chocolatey (teamviewer anydesk)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-7927653"><label class="task-list-item-label" for="task-item-7927653"> x64</label></li>
+</ul>
+<h4 id="anydesk"><a href="https://anydesk.com/zhs">AnyDesk</a></h4>
+<p>开源的远程访问软件，使用体验不佳</p>
+<h4 id="向日葵"><a href="https://sunlogin.oray.com/">向日葵</a></h4>
+<p>国产远程软件，免费用户有 1M 带宽，可以用</p>
+<h4 id="todesk"><a href="https://www.todesk.com/">ToDesk</a></h4>
+<p>国产远程软件，疫情期间的优秀产品，目前体验很棒，全平台支持</p>
+<h3 id="系统工具">系统工具</h3>
+<h4 id="notepad2-mod"><a href="https://xhmikosr.github.io/notepad2-mod/">Notepad2-mod</a></h4>
+<p>使用一个脚本可替代系统记事本，支持代码高亮</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6157144"><label class="task-list-item-label" for="task-item-6157144"> Scoop/Chocolatey (notepad2-mod)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1698394"><label class="task-list-item-label" for="task-item-1698394"> x64</label></li>
+</ul>
+<details>
+<summary>替换系统记事本.bat</summary>
+<pre><code>
+@ECHO OFF
+PUSHD %~DP0
+taskkill /f /im notepad*>NUL 2>NUL
+Md "%WinDir%\System32\test_permissions" 2>NUL||(Echo 请使用右键管理员身份运行&&Pause >NUL&&Exit)
+Rd "%WinDir%\System32\test_permissions" 2>NUL
+SetLocal EnableDelayedExpansion
+if not exist "%WinDir%\SysWOW64" reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "\"%~dp0Notepad2.exe\" /z" /f
+if exist "%WinDir%\SysWOW64" reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "\"%~dp0Notepad2_x64.exe\" /z" /f
+exit
+</code></pre>
+</details>
+<details>
+<summary>恢复系统记事本.bat</summary>
+<pre><code>
+@ECHO OFF
+PUSHD %~DP0
+taskkill /f /im notepad*>NUL 2>NUL
+Md "%WinDir%\System32\test_permissions" 2>NUL||(Echo 请使用右键管理员身份运行&&Pause >NUL&&Exit)
+Rd "%WinDir%\System32\test_permissions" 2>NUL
+SetLocal EnableDelayedExpansion
+reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /f
+reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /f
+exit
+</code></pre>
+</details>
+<h4 id="raidrive"><a href="https://www.raidrive.com/">RaiDrive</a></h4>
+<p>将网盘映射到资源管理器的软件，开源</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-2421159"><label class="task-list-item-label" for="task-item-2421159"> Chocolatey (raidrive)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1473050"><label class="task-list-item-label" for="task-item-1473050"> x64</label></li>
+</ul>
+<h4 id="fluent-terminal"><a href="https://github.com/felixse/FluentTerminal">Fluent Terminal</a></h4>
+<p>好看的第三方命令行，颜值即正义，再用主题为 <a href="https://draculatheme.com/iterm/">Dracula</a></p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6375252"><label class="task-list-item-label" for="task-item-6375252"> Chocolatey (fluent-terminal)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-2382676"><label class="task-list-item-label" for="task-item-2382676"> x64</label></li>
+</ul>
+<h4 id="sandboxie"><a href="https://www.sandboxie.com/">Sandboxie</a> 沙盒</h4>
+<p>沙盒软件，用于安装百度云那种软件</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-5726179"><label class="task-list-item-label" for="task-item-5726179"> Chocolatey (sandboxie)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-7492797"><label class="task-list-item-label" for="task-item-7492797"> x64</label></li>
+</ul>
+<h4 id="rufus"><a href="https://rufus.ie/">Rufus</a> / <a href="https://www.ultraiso.com/">UltraISO</a> 系统盘</h4>
+<p>启动盘制作工具，Rufus 更加先进，UltraISO 为收费软件，但是可以无限试用</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-1798819"><label class="task-list-item-label" for="task-item-1798819"> Scoop （rufus）</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-3199057"><label class="task-list-item-label" for="task-item-3199057"> x64</label></li>
+</ul>
+<h4 id="智能任务栏">智能任务栏</h4>
+<p>比windows自带好用的任务栏隐藏策略</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-7483083"><label class="task-list-item-label" for="task-item-7483083"> 微软应用商店</label></li>
+</ul>
+<h4 id="hashtab">HashTab</h4>
+<p>哈希值查看软件，集成在‘属性’中</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8790053"><label class="task-list-item-label" for="task-item-8790053"> x64</label></li>
+</ul>
+<h4 id="geekuninstall-卸载">GeekUninstall 卸载</h4>
+<p>卸载软件，可附带删除残留文件与注册表</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6146629"><label class="task-list-item-label" for="task-item-6146629"> Scoop/Chocolatey (geekuninstall)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1050836"><label class="task-list-item-label" for="task-item-1050836"> x64</label></li>
+</ul>
+<h4 id="vmware-虚拟机">VMware 虚拟机</h4>
+<p>虚拟机，直接使用密钥可和谐</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-4458639"><label class="task-list-item-label" for="task-item-4458639"> Chocolatey (vmwareworkstation)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-515710"><label class="task-list-item-label" for="task-item-515710"> x64</label></li>
+</ul>
+<h4 id="qttabbar"><a href="http://qttabbar.wikidot.com/">Qttabbar</a></h4>
+<p>将资源管理器标签化的工具，资源管理器该有的样子</p>
+<h4 id="pasteex"><a href="https://github.com/huiyadanli/PasteEx">PasteEx</a></h4>
+<p>将剪切板内容粘贴为txt的工具，集成到右键菜单</p>
+<h4 id="logitech-options"><a href="https://support.logi.com/hc/zh-cn/articles/360024361233">Logitech Options</a></h4>
+<p>罗技键鼠设置软件，可自定义快捷键功能</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-8025561"><label class="task-list-item-label" for="task-item-8025561"> Chocolatey (logitechoptions)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4053127"><label class="task-list-item-label" for="task-item-4053127"> x64</label></li>
+</ul>
+<h3 id="下载">下载</h3>
+<h4 id="free-download-manager">Free Download Manager</h4>
+<p>开源的下载工具，可下载种子与磁力链接，毕竟 IDM 收费而且颜值即正义</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-402444"><label class="task-list-item-label" for="task-item-402444"> Scoop/Chocolatey (freedownloadmanager)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1865591"><label class="task-list-item-label" for="task-item-1865591"> x64</label></li>
+</ul>
+<h4 id="ariang-gui"><a href="https://github.com/Xmader/aria-ng-gui">AriaNG-GUI</a></h4>
+<p>拥有 GUI 的 aira2 下载工具，实测速度优于其他软件</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-6493590"><label class="task-list-item-label" for="task-item-6493590"> Scoop (aria-ng-gui)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-9809501"><label class="task-list-item-label" for="task-item-9809501"> x64</label></li>
+</ul>
+<h3 id="影音娱乐">影音娱乐</h3>
+<h4 id="bilibili"><a href="bilibili.com">Bilibili</a></h4>
+<p>233333</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4181254"><label class="task-list-item-label" for="task-item-4181254"> 微软应用商店</label></li>
+</ul>
+<h4 id="网易云音乐">网易云音乐</h4>
+<p>随缘听歌，UWP好久没更新了</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-5636684"><label class="task-list-item-label" for="task-item-5636684"> 微软应用商店</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-9557318"><label class="task-list-item-label" for="task-item-9557318"> x64</label></li>
+</ul>
+<h3 id="我爱科研">我爱科研</h3>
+<h4 id="pycharm"><a href="https://www.jetbrains.com/pycharm/download/">Pycharm</a></h4>
+<p>Python IDE，社区版免费，启动慢是用为联网验证</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-8310925"><label class="task-list-item-label" for="task-item-8310925"> Scoop/Chocolatey (pycharm/pycharm-community)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-3456923"><label class="task-list-item-label" for="task-item-3456923"> x64</label></li>
+</ul>
+<h4 id="visual-studio-codevs-code"><a href="https://code.visualstudio.com/">Visual Studio Code(VS Code)</a></h4>
+<p>Visual Studio Code是由巨硬开发的，开源的全平台代码编辑器。Scoop安装的VSCode自带了右键的注册表文件，需要手动执行。</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-3173945"><label class="task-list-item-label" for="task-item-3173945"> Scoop/Chocolatey (vscode)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-8624130"><label class="task-list-item-label" for="task-item-8624130"> x64</label></li>
+</ul>
+<h4 id="matlab">MATLAB</h4>
+<p>工程用，功能强大，装一下十几个G就没了</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-9294749"><label class="task-list-item-label" for="task-item-9294749"> x64</label></li>
+</ul>
+<h4 id="mitk"><a href="http://www.mitk.org/">MITK</a> / <a href="https://github.com/DlutMedimgGroup/AnatomySketch-Software">AnatomySketch</a></h4>
+<p>医学图像相关软件</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-2546880"><label class="task-list-item-label" for="task-item-2546880"> x64</label></li>
+</ul>
+<h4 id="mathtype-公式编辑器">MathType 公式编辑器</h4>
+<p>公式编辑器，没法用了，可以改用 $ \LaTeX$ ，有一个好用的在线编辑器 <a href="https://latexlive.com/##">LaTeX公式编辑器</a></p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-5327090"><label class="task-list-item-label" for="task-item-5327090"> 和谐版</label></li>
+</ul>
+<h4 id="mobaxtermputty">MobaXterm/Putty</h4>
+<p>SHH工具，用于访问服务器</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-4650840"><label class="task-list-item-label" for="task-item-4650840"> Scoop/Chocolatey (mobaxterm putty)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-6361546"><label class="task-list-item-label" for="task-item-6361546"> x64</label></li>
+</ul>
+<h4 id="vncviwer">VncViwer</h4>
+<p>用于图形化操作课题组服务器</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-2184940"><label class="task-list-item-label" for="task-item-2184940"> Scoop/Chocolatey (vncviwer/vnc-viwer)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-3207261"><label class="task-list-item-label" for="task-item-3207261"> x64</label></li>
+</ul>
+<h4 id="zotero">Zotero</h4>
+<p>文献管理工具，开源，使用坚果云同步</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox" id="task-item-5529552"><label class="task-list-item-label" for="task-item-5529552"> Scoop/Chocolatey (zotero)</label></li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="" type="checkbox" id="task-item-1462842"><label class="task-list-item-label" for="task-item-1462842"> x64</label></li>
+</ul>
+<h3 id="其他">其他</h3>
+<p>其他需要下载使用的非软件型辅助工具</p>
+<h4 id="scoop下载来的git配置">Scoop下载来的git配置</h4>
+<ul>
+<li>右键菜单里添加 <code>git bash here</code></li>
+<li>新建注册表文件 <code>git bash here.reg</code>, 内容如下（路径按需修改）</li>
+</ul>
+<pre><code class="language-bash">Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\directory\background\shell\Git Bash Here]
+&quot;icon&quot;=&quot;C:\\Users\\用户名\\scoop\\apps\\git\\current\\mingw64\\share\\git\\git-for-windows.ico&quot;
+
+[HKEY_CLASSES_ROOT\directory\background\shell\Git Bash Here\command]
+@=&quot;C:\\Users\\用户名\\scoop\\apps\\git\\current\\git-bash.exe&quot;
+</code></pre>
+<h4 id="更纱黑体"><a href="https://github.com/be5invis/Sarasa-Gothic/releases">更纱黑体</a></h4>
+<p>基于思源黑体的开源中文字体，有等距模式，适合终端，腾讯镜像<a href="https://dev.tencent.com/u/gegb/p/Sarasa-Gothic/git">Sarasa-Gothic</a></p>
+<h4 id="nomeiryoui"><a href="https://github.com/Tatsu-syo/noMeiryoUI">noMeiryoUI</a></h4>
+<p>替换系统字体显示的小工具，拯救768P屏幕</p>
+<h4 id="zune皮肤">Zune皮肤</h4>
+<p>Potplayer皮肤，简洁美观</p>
+<h4 id="tcping"><a href="https://elifulkerson.com/projects/tcping.php">Tcping</a></h4>
+<p>测试海外服务器是否被TCP阻断的工具</p>
+<p>下载好tcping工具后，将可执行程序（tcping.exe或者tcping64.exe）拷贝至C:\Windows\System32目录下，这个目录是所有工具的默认路径，放在这里就不需要指定工具所在路径了。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

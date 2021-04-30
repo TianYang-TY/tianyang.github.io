@@ -1,0 +1,221 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>毒瘤软件自救指南 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    毒瘤软件自救指南
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-01-21 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/Qrkgq0Jdy/" class="post-tags">
+                            # Software
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/6KHiJEdvJL/" class="post-tags">
+                            # Windows
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>今日腾讯又双叒叕被曝光偷偷读取用户浏览器历史的丑陋行径（<a href="https://www.v2ex.com/t/745030">V2EX</a>），但是 TIM 和微信又不能弃用，所以搜寻了一些方法来压制这些毒瘤（包括但不限于腾讯全家，百度全家。）</p>
+<!-- more -->
+<h1 id="火绒">火绒</h1>
+<p>火绒可以自定义安全规则来保护某些文件夹，防止被恶意程序读取，设置路径为：<code>高级设置 - 高级防护 - 自定义防护</code> ，添加自定义路径用来保护一些重要的文件夹，比如：</p>
+<pre><code># Edge / Chrome 历史记录
+*\\User*Data\\Default*
+
+# SSH key
+?:\\Users\\*\\.ssh\*
+
+# FQ 软件
+?:\\Users\\*\\.config\*
+*\\v2rayN_Core\\config.json
+</code></pre>
+<p>设置后会立竿见影，登录 TIM 后会收到火绒的提示。Edge 等软件以及 Windows 系统的一些服务在首次启动时也会被火绒拦截，手动允许并设置不再询问即可。下面是火绒安全日志的截图：</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/image-20210121115431201.png" alt="" loading="lazy"></figure>
+<h1 id="sandboxie">Sandboxie</h1>
+<p>Sandboxie 是一个老牌的沙箱类软件，已经从商业软件转向开源，现在社区维护的版本为 <a href="https://github.com/sandboxie-plus/Sandboxie">Sandboxie Plus</a> , 用 QT 重写了原有 Sandboxie，变得好看了一些。我根据日常使用习惯，将三个软件请进了 Sandboxie 中：TIM，微信，百度网盘。微信和百度网盘比较简单，直接安装即可使用，TIM / QQ 需要一个恶心人的 QQProtect.exe 先运行，需要一番操作。主要操作学习自 <a href="https://www.v2ex.com/t/745704">V2EX</a> ，帖子内容如下：</p>
+<blockquote>
+<ol>
+<li>为每个腾讯系软件创建自己的沙盒环境</li>
+<li>全局设置-软件兼容性-勾选 Windows 10 Core UI （解决 2004 版微软拼音不能输入问题）</li>
+<li>在各自的沙盒安装软件，安装完成后先不启动，终止所有进程</li>
+<li>双击沙盒进入沙盒设置，选择 资源访问-添加文件夹-访问-closed 如：（ C:\Users\用户名\AppData\Local 、C:\Users\用户名.config 、C:\Users\用户名.ssh ）</li>
+<li>[QQ/TIM 特殊操作]沙盒设置-通用选项-自动启动 添加 QQprotect.exe 的路径</li>
+<li>沙盒设置-停止行为-添加引导程序 TIM.exe|QQ.exe-添加驻留程序 QQProtect.exe</li>
+<li>为软件创建快捷方式，打开软件，在沙盒内找到主进程，右键创建快捷方式</li>
+</ol>
+<p>可选： 关闭边界黄线</p>
+<p>说明：</p>
+<ol>
+<li>（不进行）操作 2 会导致不能输入中文，或者需要在微软拼音中选择启用兼容性旧版输入法</li>
+<li>操作 4 将所有不希望 TIM 获取到的文件夹写入，记得访问调成 closed，不然默认允许访问</li>
+<li>操作 5 仅 QQ 、TIM 需要，目的是启动沙盒时自动启动 QQProtect</li>
+<li>操作 6 目的是引导程序 TIM 停止后，自动停止 QQProtect 运行，做到 QQProtect 只能在 TIM 运行时运行</li>
+</ol>
+</blockquote>
+<p>其中第五点经过测试不可用，TIM还是无法启动。可以使用以下方法启动：</p>
+<pre><code class="language-bash"># 新建一个 bat 文件
+# /box: 后面是自己设置的沙盒名称
+@echo off
+&quot;C:\Program Files\Sandboxie\Start.exe&quot; /box:Tim &quot;C:\Program Files (x86)\Common Files\Tencent\QQProtect\Bin\QQProtect.exe&quot;
+&quot;C:\Program Files\Sandboxie\Start.exe&quot; /box:Tim &quot;C:\Program Files (x86)\Tencent\TIM\Bin\TIM.exe&quot;
+</code></pre>
+<p>然后就可以看到毒瘤们老老实实待在沙箱中了</p>
+<figure data-type="image" tabindex="2"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210121124032.png" alt="" loading="lazy"></figure>
+<h3 id="固定到开始菜单">固定到开始菜单</h3>
+<p>个人习惯将软件固定到开始屏幕，方便随时启动，还能保持干净的桌面。微信和百度网盘安装之后可以按照上面帖子的方案将快捷方式固定，使用 bat 文件启动的 TIM 需要先给 bat 文件生成一个快捷方式，修改成 TIM 的图标（C:\Sandbox\XXX\Tim\drive\C\Program Files (x86)\Tencent\TIM\TIMUninst.ico），然后把快捷方式放在 <code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs</code> 下。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/vscode-python-dev/" class="post-title gt-a-link">
+                    基于 VSCode 的 Python 开发环境
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

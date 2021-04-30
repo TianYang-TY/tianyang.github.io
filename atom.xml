@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://yangt.me</id>
+    <title>Yang&apos;s blog</title>
+    <updated>2021-04-30T07:47:44.155Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://yangt.me"/>
+    <link rel="self" href="https://yangt.me/atom.xml"/>
+    <subtitle>苟利国家生死以，岂因祸福避趋之🕶</subtitle>
+    <logo>https://yangt.me/images/avatar.png</logo>
+    <icon>https://yangt.me/favicon.ico</icon>
+    <rights>All rights reserved 2021, Yang&apos;s blog</rights>
+    <entry>
+        <title type="html"><![CDATA[我的密码折腾之路]]></title>
+        <id>https://yangt.me/post/my-password-managers/</id>
+        <link href="https://yangt.me/post/my-password-managers/">
+        </link>
+        <updated>2021-04-30T06:21:46.000Z</updated>
+        <summary type="html"><![CDATA[<p>原来我的密码风格都是网站名加固定密码的组合方式，存在一点点的安全隐患。之前就在 TESTV 节目里看到过 1PassWord 的强大功能，可惜不是睾贵的苹果用户，目前 1PassWord 也有安卓和 Windows 端，只是体验不佳，而且每年还都有白嫖活动。在去年疫情时的心血来潮想要使用密码管理器，本着能不花钱就不花钱，能用开源的就用开源的原则，就走上了这条折腾的不归路。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>原来我的密码风格都是网站名加固定密码的组合方式，存在一点点的安全隐患。之前就在 TESTV 节目里看到过 1PassWord 的强大功能，可惜不是睾贵的苹果用户，目前 1PassWord 也有安卓和 Windows 端，只是体验不佳，而且每年还都有白嫖活动。在去年疫情时的心血来潮想要使用密码管理器，本着能不花钱就不花钱，能用开源的就用开源的原则，就走上了这条折腾的不归路。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[部分容积校正方法与操作]]></title>
+        <id>https://yangt.me/post/partial-volume-correction/</id>
+        <link href="https://yangt.me/post/partial-volume-correction/">
+        </link>
+        <updated>2021-04-19T14:00:59.000Z</updated>
+        <summary type="html"><![CDATA[<p>部分容积校正（Partial Volume Correction）的目的是校正由于目标物体相对于分辨率大小的有限所造成的信号的损失，以及目标区域外的信号污染，即校正部分容积效应（Partial Volume Effect）。对于 PVE 与 PVC 的概念知识可以参考以下两篇知乎文章：<a href="https://zhuanlan.zhihu.com/p/46252046">Partial Volume Effect（部分容积效应） - 知乎 (zhihu.com)</a>, <a href="https://zhuanlan.zhihu.com/p/50446108">Partial Volume Correction（部分容积校正） - 知乎 (zhihu.com)</a>。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>部分容积校正（Partial Volume Correction）的目的是校正由于目标物体相对于分辨率大小的有限所造成的信号的损失，以及目标区域外的信号污染，即校正部分容积效应（Partial Volume Effect）。对于 PVE 与 PVC 的概念知识可以参考以下两篇知乎文章：<a href="https://zhuanlan.zhihu.com/p/46252046">Partial Volume Effect（部分容积效应） - 知乎 (zhihu.com)</a>, <a href="https://zhuanlan.zhihu.com/p/50446108">Partial Volume Correction（部分容积校正） - 知乎 (zhihu.com)</a>。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[毒瘤软件自救指南]]></title>
+        <id>https://yangt.me/post/fxxk-tencent/</id>
+        <link href="https://yangt.me/post/fxxk-tencent/">
+        </link>
+        <updated>2021-01-21T04:42:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>今日腾讯又双叒叕被曝光偷偷读取用户浏览器历史的丑陋行径（<a href="https://www.v2ex.com/t/745030">V2EX</a>），但是 TIM 和微信又不能弃用，所以搜寻了一些方法来压制这些毒瘤（包括但不限于腾讯全家，百度全家。）</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>今日腾讯又双叒叕被曝光偷偷读取用户浏览器历史的丑陋行径（<a href="https://www.v2ex.com/t/745030">V2EX</a>），但是 TIM 和微信又不能弃用，所以搜寻了一些方法来压制这些毒瘤（包括但不限于腾讯全家，百度全家。）</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于 VSCode 的 Python 开发环境]]></title>
+        <id>https://yangt.me/post/vscode-python-dev/</id>
+        <link href="https://yangt.me/post/vscode-python-dev/">
+        </link>
+        <updated>2020-11-24T09:18:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>本文记录电脑中基于 VSCode 进行 Python 开发环境的流程。初上手 Python 时，Pycharm 是一个非常便利的 IDE，随着使用频率的增加，愈发被 Pycharm 超慢的启动速度困扰，于是转入 VSCode。VSCode 定位是一个文本编辑器，并不是跟 Pycharm 一样的 IDE，得益于丰富的插件支持，可以自定义出一套满足自己需求的开发环境。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本文记录电脑中基于 VSCode 进行 Python 开发环境的流程。初上手 Python 时，Pycharm 是一个非常便利的 IDE，随着使用频率的增加，愈发被 Pycharm 超慢的启动速度困扰，于是转入 VSCode。VSCode 定位是一个文本编辑器，并不是跟 Pycharm 一样的 IDE，得益于丰富的插件支持，可以自定义出一套满足自己需求的开发环境。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Freesurfer操作文档]]></title>
+        <id>https://yangt.me/post/freesurfer-use/</id>
+        <link href="https://yangt.me/post/freesurfer-use/">
+        </link>
+        <updated>2020-05-07T14:58:25.000Z</updated>
+        <summary type="html"><![CDATA[<p>本文档的操作流程基于 Ububtu 18.04LTS 以及 Freesurfer 6.0，安装过程记录在另一篇文档 <em><a href="http://193824.xyz/post/zai-ubuntu1804lts-zhong-an-zhuang-freesurfer/">在 Ubuntu18.04LTS 中安装 FreeSurfer</a></em> 中。本文档操作全部在终端中进行，Freesurfer 的 GUI 仅用作查看操作结果。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本文档的操作流程基于 Ububtu 18.04LTS 以及 Freesurfer 6.0，安装过程记录在另一篇文档 <em><a href="http://193824.xyz/post/zai-ubuntu1804lts-zhong-an-zhuang-freesurfer/">在 Ubuntu18.04LTS 中安装 FreeSurfer</a></em> 中。本文档操作全部在终端中进行，Freesurfer 的 GUI 仅用作查看操作结果。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在Ubuntu18.04LTS中安装FreeSurfer]]></title>
+        <id>https://yangt.me/post/install-freesurfer-on-ubuntu1804lts/</id>
+        <link href="https://yangt.me/post/install-freesurfer-on-ubuntu1804lts/">
+        </link>
+        <updated>2020-02-18T14:55:41.000Z</updated>
+        <summary type="html"><![CDATA[<p>本文档主要参考了<a href="https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall">FreeSurfer官方教程</a>以及CSDN上的一篇文章<a href="https://blog.csdn.net/qq_32696375/article/details/84024326">Ubuntu 18.04安装FreeSurfer软件</a>。由于系统与软件的更新迭代，必须进行一些额外的操作才能够成功安装。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>本文档主要参考了<a href="https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall">FreeSurfer官方教程</a>以及CSDN上的一篇文章<a href="https://blog.csdn.net/qq_32696375/article/details/84024326">Ubuntu 18.04安装FreeSurfer软件</a>。由于系统与软件的更新迭代，必须进行一些额外的操作才能够成功安装。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[WIFI断连自动连接脚本]]></title>
+        <id>https://yangt.me/post/reconnect-wifi/</id>
+        <link href="https://yangt.me/post/reconnect-wifi/">
+        </link>
+        <updated>2020-02-10T14:43:22.000Z</updated>
+        <summary type="html"><![CDATA[<p>疫情期间需要远程访问电脑进行工作，实验室电脑一旦出现网络问题就只能求助老师到现场重连WIFI。为了监测网络状态，并在断网时能够及时自动重新连回实验室路由器，编写了以下脚本。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>疫情期间需要远程访问电脑进行工作，实验室电脑一旦出现网络问题就只能求助老师到现场重连WIFI。为了监测网络状态，并在断网时能够及时自动重新连回实验室路由器，编写了以下脚本。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[在vps上搭建Jupyter环境]]></title>
+        <id>https://yangt.me/post/jupyter-env/</id>
+        <link href="https://yangt.me/post/jupyter-env/">
+        </link>
+        <updated>2019-11-12T14:37:21.000Z</updated>
+        <summary type="html"><![CDATA[<p>之前在吴恩达的深度学习课上接触了Jupyter，一直在本地使用，每次想启动都得打开PowerShell输入jupyter notebook的命令，启动后的目录下还包含路径下其他文件，很是不够方便。</p>
+<p>其实我一直有一个vps服务器默默工作在大洋彼岸，心想着可以在上面搭建个Jupyter环境，趁清明假期配置了一下。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>之前在吴恩达的深度学习课上接触了Jupyter，一直在本地使用，每次想启动都得打开PowerShell输入jupyter notebook的命令，启动后的目录下还包含路径下其他文件，很是不够方便。</p>
+<p>其实我一直有一个vps服务器默默工作在大洋彼岸，心想着可以在上面搭建个Jupyter环境，趁清明假期配置了一下。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Windows系统下TensorFlow-GPU环境搭建]]></title>
+        <id>https://yangt.me/post/tensorflow-gpu-env-under-windows/</id>
+        <link href="https://yangt.me/post/tensorflow-gpu-env-under-windows/">
+        </link>
+        <updated>2019-09-28T14:42:03.000Z</updated>
+        <summary type="html"><![CDATA[<p>以 Windows 7 SP1 专业版系统为例，进行 Windows 下 TensorFlow GPU 环境的配置，尽可能复现课题组 Ubuntu 服务器中的版本。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>以 Windows 7 SP1 专业版系统为例，进行 Windows 下 TensorFlow GPU 环境的配置，尽可能复现课题组 Ubuntu 服务器中的版本。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[服务器被SSH暴力破解解决方案]]></title>
+        <id>https://yangt.me/post/protect-server-under-ssh-cracking/</id>
+        <link href="https://yangt.me/post/protect-server-under-ssh-cracking/">
+        </link>
+        <updated>2019-07-07T14:40:43.000Z</updated>
+        <summary type="html"><![CDATA[<p>服务器端使用Debian 9×64系统，发现大量不存在的用户名登陆失败记录，于是使用Fail2ban进行IP封禁。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>服务器端使用Debian 9×64系统，发现大量不存在的用户名登陆失败记录，于是使用Fail2ban进行IP封禁。</p>
+]]></content>
+    </entry>
+</feed>

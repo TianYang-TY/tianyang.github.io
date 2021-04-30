@@ -1,0 +1,217 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>WIFI断连自动连接脚本 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    WIFI断连自动连接脚本
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-02-10 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/6KHiJEdvJL/" class="post-tags">
+                            # Windows
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>疫情期间需要远程访问电脑进行工作，实验室电脑一旦出现网络问题就只能求助老师到现场重连WIFI。为了监测网络状态，并在断网时能够及时自动重新连回实验室路由器，编写了以下脚本。</p>
+<!-- more -->
+<h2 id="获取目标wifi的ssid">获取目标WIFI的ssid</h2>
+<p>首先使用如下命令查看周围的WIFI</p>
+<pre><code class="language-cmd">netsh wlan show networks mode=bssid
+</code></pre>
+<p>然后查看已经连接过WIFI的配置文件</p>
+<pre><code class="language-cmd">netsh wlan show profiles
+</code></pre>
+<p>记下目标WIFI的名称与ssid，应该是相同的，不能记错，否则断开后程序再也无法连接。</p>
+<p>实际上，连接WIFI的主要命令只有两句</p>
+<pre><code class="language-cmd"># XXX按目标WIFI填写
+netsh wlan disconnect
+netsh wlan connect ssid=XXX name=XXX
+</code></pre>
+<h2 id="windows批处理脚本">Windows批处理脚本</h2>
+<p>此脚本的内容为每十分钟检测电脑与百度和大连理工大学网信中心之间的连接性，在确认断连后执行上面的重连命令。<em>202.118.66.6为大连理工大学网信中心DNS服务器IP，非大连理工大学校园网环境无法使用</em></p>
+<pre><code class="language-cmd">@echo off
+echo WIFI自动重连服务正在进行中.......
+echo 停止服务请按 Ctrl+C
+:begin
+echo %date% %time%
+ping baidu.com
+rem echo %errorlevel%
+if %errorlevel%==1 goto ping2
+goto loop
+ 
+:ping2
+ping 202.118.66.6
+rem echo %errorlevel%
+if %errorlevel%==1 goto reconnect
+goto loop
+
+:reconnect
+echo %date% %time% 网络主动断开
+netsh wlan disconnect
+echo %date% %time% 正在重新连接中....
+netsh wlan connect ssid=MICCAI_5G name=MICCAI_5G
+echo %date% %time% 已发送连接请求....ssid=MICCAI_5G
+goto loop
+ 
+:loop
+timeout 600
+goto begin
+</code></pre>
+<h3 id="总结">总结</h3>
+<p>脚本已经部署运行，还未有机会触发重连功能。</p>
+<p>除了监测与互联网的连接性外，还可以采取每日定时断开WIFI重新连接的方法，或者在Windows系统的计划任务程序功能中设置WIFI状态触发等方式。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/jupyter-env/" class="post-title gt-a-link">
+                    在vps上搭建Jupyter环境
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>我的密码折腾之路 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    我的密码折腾之路
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-04-30 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/zW_S6KrJu/" class="post-tags">
+                            # Password
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/Qrkgq0Jdy/" class="post-tags">
+                            # Software
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>原来我的密码风格都是网站名加固定密码的组合方式，存在一点点的安全隐患。之前就在 TESTV 节目里看到过 1PassWord 的强大功能，可惜不是睾贵的苹果用户，目前 1PassWord 也有安卓和 Windows 端，只是体验不佳，而且每年还都有白嫖活动。在去年疫情时的心血来潮想要使用密码管理器，本着能不花钱就不花钱，能用开源的就用开源的原则，就走上了这条折腾的不归路。</p>
+<!-- more -->
+<h2 id="keepass">KeePass</h2>
+<p>首先使用的是最为老牌的 KeePass 了，一开始是迟到了知乎一篇文章的安利（<a href="https://zhuanlan.zhihu.com/p/39645975">一劳永逸：KeePass全网最详使用指南 - 知乎 (zhihu.com)</a> ），正好自己是坚果云的高强度用户，密码备份有着落，就跟着教程一步一步的配置了 KeePass 的环境，并且一直使用了一年左右。</p>
+<p>KeePass 作为老牌开源软件，其功能性是毋庸置疑的。自动混淆输入，丰富的插件支持，多种备份方式支持等等，都是非常强大而且实用的功能。同时由于其开源特性，在各平台有着各种各样的客户端，Windows 上有官方的 KeePass2，还有经典的 KeePassXC 等等，也是由于其开源社区维护的特性，这些软件的 UI 充满了复古气息，操作上也比较复杂，使用起来多有不便。</p>
+<p>经过很长时间的磨合，在 Windows 端我依然选择的是最丑同时也是功能最全的 KeePass2，最大的需求是 Windows Hello 的支持，当然这个支持需要插件来完成，另外对于两步验证也就是 TOTP 的支持也是可以使用插件来完成的；在安卓端，一开始使用的是 KeePass2Android，这也是大多数人的选择，安卓平台也有 KeePassXc 可以选择，只是作者不愿意支持联网同步，无法满足我的需求，后来在酷安发现了一个新秀 KeePassA，也是开源的，对于指纹、TOTP的支持也是完整的，更重要的是 UI 非常的舒服，所以后来就转向了 KeePassA。</p>
+<h2 id="bitwarden">Bitwarden</h2>
+<p>其实因为 KeePass 太丑，一直想要找一个合适的替代品，在 V2EX 的密码管理器日经贴中，很多人一直在提 Bitwarden，便萌生了使用的念头，一开始使用了官方版，发现免费版本不能使用 TOTP，对自己搭建密码管理器心存芥蒂，总怕哪天服务器崩了就把所有密码一锅端了。4 月初在知乎上发现了一篇使用腾讯云托管的方法搭建 Bitwarden 的方法，便试了一下。</p>
+<h3 id="腾讯云托管">腾讯云托管</h3>
+<p><a href="https://zhuanlan.zhihu.com/p/356369929">用了4年密码管理神器KeePass，结果一试Bitwarden就回不去了！？ - 知乎 (zhihu.com)</a>，这是那篇链接，详细记录了搭建的流程。腾讯云开发首次使用送一个月的免费资源，我就开始了入坑之旅。从使用的环境上看，不是原版的 Bitwarden Docker，而实备受好评的 bitwarden-rs，占用更低，使用腾讯云的流程搭建的服务会直接获得一个 HTTPS 的链接，不需要其他操作就可以直接使用了，注册之后需要添加一个禁用注册的环境变量。就这么使用了一个月，之间大概算了一下价格，正常一个人使用情况下，一个月五六块的样子，其实一开始都准备接受这个价格一直用下去了，就在前两天突然就崩了，重新部署一直失败，就放弃了。总结一下腾讯云的最大优点就是一键部署，非常省事，可惜就是稳定性太差，他的 GitHub 仓库里也是有很多人反馈说不稳定，还有一个非常影响体验的点，腾讯云的服务器在不使用的时候会休眠，唤醒需要等待一段时间。</p>
+<p>在使用的这一个月里，感受到 Bitwarden 使用起来确实非常方便，使用最多的是浏览器插件，对网页的识别要优于 KeePass，填充起来也更舒适，所以腾讯云崩了之后便想着自建了。</p>
+<h3 id="自建-bitwarden-rs">自建 bitwarden-rs</h3>
+<p>因为腾讯云崩了，一开始是想着趁腾讯云服务器的活动还没结束，花个 89 买一年的服务器自己搭建，后来想到自己在 Oracle 上白嫖的终身免费服务器理论上能保持更长的时间，所以准备直接用 Oracle 的服务器试试。之前因为端口的问题，只在服务器上跑了一些小应用，完全没用过网页服务，后来找到了解决方案，这样操作之后还是不能 ping，但是端口已经开放了，可以正常搭建网页服务，就是这么离谱。为了测试端口能否正常搭建，我一开始使用了宝塔面板，后来想想也没啥用，有机会就直接卸载了。</p>
+<pre><code class="language-bash"># 首先需要设置安全组
+将默认的安全组中的 ICMP 参数改成 8，TCP 协议开放目标端口
+# 关闭 Ubuntu 系统内的防火墙
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+sudo iptables -F
+</code></pre>
+<p>下面记录了自建 bitwarden-rs 时的所有操作：</p>
+<h4 id="docker">Docker</h4>
+<p>为了方便，使用的是 Docker compose，将容器的 <code>data</code> 文件夹映射到本地的 <code>bw-data</code></p>
+<pre><code class="language-yaml"># docker-compose.yml
+version: '3'
+
+services:
+  bitwarden:
+    image: bitwardenrs/server:latest
+    container_name: bitwarden
+    restart: always
+    volumes:
+      - ./bw-data:/data
+    env_file:
+      - config.env
+    ports:
+      - &quot;2333:80&quot; #将2333端口映射到镜像80端口
+    environment:
+      #WEBSOCKET_ENABLED: &quot;true&quot; #开启WebSocket
+      SIGNUPS_ALLOWED: &quot;false&quot; #开启注册，自己注册后改成fale
+      #WEB_VAULT_ENABLED: &quot;true&quot; #web客户端
+</code></pre>
+<h4 id="nginx-反代">Nginx 反代</h4>
+<p>因为不太会写 Nginx 的配置文件，现在使用的宝塔面板里的 Nginx 反代功能：首先去设置一个子域名解析到服务器 IP，然后在宝塔面板里新建一个空白的网站，直接设置反代即可，因为我用的是 CLoudFlare 的域名托管，所以就没申请 TTL 证书也能使用 HTTPS，如果需要申请证书，宝塔面板生成的空白网站就不太方便了。</p>
+<p>宝塔面板有一天是要被卸载的，到时候再更新使用 Docker 部署 Nginx 的内容。</p>
+<h4 id="备份">备份</h4>
+<p>使用自己搭建的服务，定时备份数据库是非常必要的，这里就使用网上找到的一个简单脚本，每周一定时备份到坚果云里。新建一个脚本如下内容，需要自行设定路径与文件夹，去坚果云里新建一个应用密码，在坚果云根目录新建一个 bitwarden 文件夹，使用 crontab 每周一零点定时执行这个脚本 <code>0 0 * * 1 /bin/sh 脚本</code>，并没有设置自动删除过期备份文件的功能，因为坚果云的文件不传输是不消耗流量的，而且一周备份一次的频率也不高，并不会积攒太多的文件，以后文件太多的话手动删除一部分就是了。</p>
+<pre><code class="language-sh">#!/bin/sh
+
+set -e
+
+filename=&quot;bitwarden-`date +%F`.tar.gz&quot;
+cd /root
+tar czf &quot;${filename}&quot; bw-data/
+curl -u &quot;USERNAME:APP_PASSWD&quot; -T &quot;${filename}&quot; &quot;https://dav.jianguoyun.com/dav/bitwarden/&quot;
+
+rm &quot;${filename}&quot;
+</code></pre>
+<h4 id="使用">使用</h4>
+<p>电脑上使用的是 Bitwarden 的浏览器插件，桌面端几乎没有打开过，所以依赖桌面端的 Windows Hello 解锁就不能用了，现在设定的是每次锁定电脑时自动锁定数据库，也算是在安全性和便利性之间的一个折中。</p>
+<p>手机端使用的是没有官方提供的不依赖谷歌框架的客户端，因为我嫌谷歌框架太耗电就禁用了。依赖于安卓本身支持密码管理器的特性，使用起来没有问题。</p>
+<h2 id="总结">总结</h2>
+<p>经历一番波折，终于将密码管理从 KeePass 转换到 Bitwarden，其中走了不少偷懒的路，比如宝塔面板的 Nginx 反代，比如 CloudFlare 的 HTTPS，以后有机会继续完善。</p>
+<p>使用密码管理器一开始确实是麻烦了一些，需要将自己原来的密码一个一个输入进去，简单的密码还需要去原网站修改密码，在这一切都设置好之后，使用起来便得心应手了，无论是安全性还是输密码的便捷性都比自己用脑子记一个密码要好。</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/partial-volume-correction/" class="post-title gt-a-link">
+                    部分容积校正方法与操作
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>部分容积校正方法与操作 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    部分容积校正方法与操作
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2021-04-19 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/qHlhQKMIa/" class="post-tags">
+                            # PVC
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/nXH6UnePtt/" class="post-tags">
+                            # Freesurfer
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>部分容积校正（Partial Volume Correction）的目的是校正由于目标物体相对于分辨率大小的有限所造成的信号的损失，以及目标区域外的信号污染，即校正部分容积效应（Partial Volume Effect）。对于 PVE 与 PVC 的概念知识可以参考以下两篇知乎文章：<a href="https://zhuanlan.zhihu.com/p/46252046">Partial Volume Effect（部分容积效应） - 知乎 (zhihu.com)</a>, <a href="https://zhuanlan.zhihu.com/p/50446108">Partial Volume Correction（部分容积校正） - 知乎 (zhihu.com)</a>。</p>
+<!-- more -->
+<p>下面记录了我使用 <a href="https://surfer.nmr.mgh.harvard.edu/">FreeSurfer</a> 与 <a href="https://github.com/UCL/PETPVC">PETPVC</a> 的 PVC 功能进行部分容积校正的内容。</p>
+<h2 id="freesurfer">FreeSurfer</h2>
+<p>FreeSurfer 的安装与使用内容在另外两篇文档中已经记录，PVC 的内容主要包含在 PETSurfer 的内容中，之前根据官方文档的操作比较简单，下面是一些更为复杂的操作，操作时需要确保 Subject 已经经过了 <code>recon-all</code> 的操作。</p>
+<p>FreeSurfer 的 PVC 使用的是 GTM 和 MG 方法，都是基于 VOI 的方法，所以需要确定一个标签图。在 FreeSurfer 中，可以使用 <code>gtmseg</code> 来创建一个自定义的标签图，或者使用默认的分割方式获得一个分割结果，下面就是终端运行 <code>gtmseg --help</code> 得到的一个结果。得到一个目标标签图之后就可以继续使用 <code>mri_coreg</code> 和 <code>mri_gtmpvc</code> 的命令去进行 PVC 的操作，操作参数与结果都在之前的文档中有写。</p>
+<pre><code class="language-bash"># gtmseg --help
+You can use your own segmentation or a modified FS segmentation. It will be easiest if you modify apas+head.mgz to insert your segmentations. apas+head.mgz is created by gtmseg but you can create it with 
+
+xcerebralseg --s $subject --o $SUBJECTS_DIR/$subject/mri/apas+head.mgz
+
+To create a new segmentation by replacing voxels in apas+head.mgz with your segmentation: make sure that the index you give your new segmentation(s) is not already present in apas+head.mgz. Next create a color table text file that looks something like this:
+
+# TissueTypeSchema 
+#ctTType   0  unknown                           0   0   0    0
+#ctTType   1  cortex                          205  62  78    0
+#ctTType   2  subcort_gm                      230 148  34    0
+#ctTType   3  wm                                0 255   0    0
+#ctTType   4  csf                             120  18 134    0
+#ctTType   5  head                            150 150 200    0
+265 MySeg            219 100 176 0 2
+
+In the above case, it is assumed that the index that you used was 265 and that your segmentation is for subcortical gray matter (thus making the last number=2 in the MySeg row). If you have more than one segmentation you are adding, then add rows into the color table. The first 5 entries codes for the different possible tissue types.
+
+You can then run
+
+gtmseg --s subject --head apas+head+myseg.mgz \
+   --ctab myseg.colortable.txt --o gtmseg+myseg.mgz  
+
+where apas+head+myseg.mgz is apas+head.mgz with your new segmentation, myseg.colortable.txt is the color table you created, and gtmseg+myseg.mgz will be your output volume. Note that an output color table gtmseg+myseg.ctab will be generated. You should check in this to make sure that your segmentation appears. You can also run
+
+tkmeditfv subject orig.mgz -seg gtmseg+myseg.mgz  myseg.colortable.txt
+</code></pre>
+<h2 id="petpvc">PETPVC</h2>
+<p>PETPVC 是一个开源的工具箱，集成了众多的 PVC 方法，当前最新版本为 1.2.4, 以下为安装与使用方法。</p>
+<pre><code class="language-bash"># 下载
+wget https://github.com/UCL/PETPVC/releases/download/v1.2.4/PETPVC-1.2.4-Linux.tar.gz
+# 解压
+tar -xzvf PETPVC-1.2.4-Linux.tar.gz
+# 设置环境变量
+# 文件夹其实不必要放在 /usr/local/ 下，但是需要保证 .bashrc 文件中指向正确的路径
+sudo cp -r PETPVC-1.2.4 /usr/local/PETPVC
+gedit ~/.bashrc # 拉到最后一行
+PATH=$PATH:/usr/local/PETPVC/bin
+source ~/.bashrc
+</code></pre>
+<p>所有基于 VOI 的 PVC 方法在使用时均需要一个标签图，假设使用 FreeSurfer 获得的 <code>gtmseg.mgz</code> 文件作为标签图，下面为处理流程。</p>
+<ol>
+<li>预处理</li>
+</ol>
+<p>如果使用基于 VOI 的方法，需要确保 PET 图像与标签图具有同一物理空间和图像尺寸，否则无法进行 PVC，然后对标签图进行处理。如果使用纯基于体素的方法，不需要下面的预处理。</p>
+<pre><code class="language-bash"># 转为 nii/nii.gz - PETPVC 使用的 ITK, 转换为 ITK 能够识别的格式即可
+mri_convert gtmseg.mgz gtmseg.nii.gz
+# 转换为 4D Mask，4D 文件中每个图像代表一个脑区
+pvc_make4d -i gtmseg.nii.gz -o 4D_gtmseg.nii.gz
+</code></pre>
+<ol start="2">
+<li>PVC</li>
+</ol>
+<pre><code class="language-bash"># 官方示例
+petpvc -i &lt;PET&gt; -m &lt;MASK&gt; -o &lt;OUTPUT&gt; --pvc IY -x 6.0 -y 6.0 -z 6.0 [--debug]
+</code></pre>
+<p>其中 <code>xyz</code> 为 PET 图像采集时机器决定的参数 FWHM，如果使用的是完全基于体素的算法，比如 RL，那么不需要输入 <code>m</code> 参数。</p>
+<p>如果观察之前解压出来的 PETPVC 安装文件夹，可以发现 <code>/bin</code> 目录下还存在不少以 PVC 方法命名的可执行文件，比如 <code>pvc_gtm pvc_iy pvc_mg pvc_mtc pvc_rbv pvc_relabel pvc_rl pvc_vc</code> 等，也可以直接调用特定的方法来执行，而且如果直接执行这些文件的话，可以看到专属的帮助文档，比如 pvc_rl 的文档，可以看到使用 petpvc 看不到的迭代次数等参数。</p>
+<pre><code class="language-bash"># pvc_rl
+Option petfile is required but not defined
+Option outputfile is required but not defined
+Option FWHMx is required but not defined
+Option FWHMy is required but not defined
+Option FWHMz is required but not defined
+ Command tags: 
+   -x &lt; X &gt; 
+      = The full-width at half maximum in mm along x-axis
+   -y &lt; Y &gt; 
+      = The full-width at half maximum in mm along y-axis
+   -z &lt; Z &gt; 
+      = The full-width at half maximum in mm along z-axis
+   [ -i --iter [ Val ] ]
+      = Number of iterations
+        With: Val (Default = 10)
+   [ -d --debug ]
+      = Prints debug information
+ Command fields: 
+   &lt; petfile &gt; 
+      = PET filename
+   &lt; outputfile &gt; 
+      = output filename
+</code></pre>
+<ol start="3">
+<li>并行处理</li>
+</ol>
+<p>这一步是在处理大量 PET 数据时一个节省时间的做法，不影响 PVC 效果，GNU Parallel 的安装与使用见之前的 FreeSurfer 操作文档，PETPVC 在处理时会进行多核运算，所以没必要并行太多，以免服务器内存爆满导致 PVC 失败。</p>
+<pre><code># subject_id.txt 存储了待处理的 Subjects ID
+parallel -a subject_id.txt --jobs 4 petpvc -i ./PET/{}.nii.gz -o pvc_RL/{}.nii.gz --pvc RL -x 8 -y 8 -z 8
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/fxxk-tencent/" class="post-title gt-a-link">
+                    毒瘤软件自救指南
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

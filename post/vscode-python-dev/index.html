@@ -1,0 +1,248 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>基于 VSCode 的 Python 开发环境 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    基于 VSCode 的 Python 开发环境
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-11-24 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/jS79XH-go/" class="post-tags">
+                            # VSCode
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/d-S3t1v6d/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本文记录电脑中基于 VSCode 进行 Python 开发环境的流程。初上手 Python 时，Pycharm 是一个非常便利的 IDE，随着使用频率的增加，愈发被 Pycharm 超慢的启动速度困扰，于是转入 VSCode。VSCode 定位是一个文本编辑器，并不是跟 Pycharm 一样的 IDE，得益于丰富的插件支持，可以自定义出一套满足自己需求的开发环境。</p>
+<!--more-->
+<h2 id="python-安装">Python 安装</h2>
+<p>安装 Python 有两种途径，一种是去 Python 官网下载单独的 Python 安装包，另一种是使用 Anaconda 包管理器。目前使用的是 Anaconda 方法，在安装的同时也会附带更多的常用库，免得自己再逐个安装，并外还能够很方便的生成不同的虚拟环境，以应对不同的开发需求。如果只需要虚拟环境，不需要那么多的库，可以使用 miniconda。</p>
+<p>Anconda 的安装包可以从清华大学的镜像中下载，安装时需要注意设定到环境变量，否则 VSCode 中的终端无法执行 Python 程序。安装之后需要设定 conda 和 pip 的国内镜像源，提升下载速度，方法如下</p>
+<blockquote>
+<p>清华 Anaconda 镜像帮助连接： <a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/</a></p>
+<p>各系统都可以通过修改用户目录下的 .condarc 文件。Windows 用户无法直接创建名为 .condarc 的文件，可先执行 conda config --set show_channel_urls yes 生成该文件之后再修改。</p>
+</blockquote>
+<pre><code>channels:
+  - defaults
+show_channel_urls: true
+channel_alias: https://mirrors.tuna.tsinghua.edu.cn/anaconda
+default_channels:
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/r
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/pro
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2
+custom_channels:
+  conda-forge: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  msys2: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  bioconda: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  menpo: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  pytorch: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+  simpleitk: https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud
+</code></pre>
+<pre><code># 设置 pip 的源
+pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
+</code></pre>
+<h2 id="vscode-安装">VSCode 安装</h2>
+<p><a href="https://code.visualstudio.com/">VSCode</a> 是一个全平台通用的文本编辑器，在官网下载安装即可。</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20201124145300.png" alt="" loading="lazy"></figure>
+<h2 id="插件安装">插件安装</h2>
+<h3 id="chinese-simplified-language-pack-for-visual-studio-code-中文语言包"><a href="https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-zh-hans">Chinese (Simplified) Language Pack for Visual Studio Code / 中文语言包</a></h3>
+<p>将软件的语言设置为中文。</p>
+<h3 id="python"><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python</a></h3>
+<p>VSCode 的 Python 扩展，使 VSCode 拥有调用 Python 解释器的功能。安装成功之后可以新建一个 <code>.py</code> 文件，然后在窗口的左下角选择 Python 解释器，VSCode 会自动搜索系统中的 Python 环境。然后可以 <code>print('hello world')</code> 检查一下是否有问题。</p>
+<figure data-type="image" tabindex="2"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20201124165038.png" alt="" loading="lazy"></figure>
+<h3 id="bracket-pair-colorizer-2-彩色括号"><a href="https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer-2">Bracket Pair Colorizer 2 / 彩色括号</a></h3>
+<p>将不同的括号用不同的颜色标识，方便区分。</p>
+<figure data-type="image" tabindex="3"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20201124164614.png" alt="" loading="lazy"></figure>
+<h3 id="dracula-official-主题"><a href="https://marketplace.visualstudio.com/items?itemName=dracula-theme.theme-dracula">Dracula Official / 主题</a></h3>
+<p>VSCode 支持设置各种各样的主题，在扩展库搜索 <code>Theme</code> 即可出现所有可用主题。</p>
+<img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20201124164044.png" style="zoom: 67%;" />
+<h3 id="material-icon-theme-图标主题"><a href="https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme">Material Icon Theme / 图标主题</a></h3>
+<p>扁平化图标主题，颜值才是第一生产力。</p>
+<h3 id="jupyter"><a href="https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter">Jupyter</a></h3>
+<p>VSCode 现在已经支持了 Jupyter Notebook，装个插件就可以了。</p>
+<h3 id="remote-ssh-远程开发"><a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh">Remote-SSH / 远程开发</a></h3>
+<p>可以让通过SSH连接远程服务器作为本地的开发环境，连接远程服务器最好使用 SSH key，不建议使用密码，否则会不停地在输入密码。</p>
+<h2 id="settingsjson-设置">settings.json / 设置</h2>
+<p>VSCode 的 GUI 设置并不完善，更多还是直接操作 <code>settings.json</code> ， <code>Ctrl+Shift+P</code> 可以搜索 <code>settings.json</code>  打开，前面设置的主题、图标等都会在这里看到，另外还可以在这里设置字体等格式。</p>
+<pre><code class="language-json">&quot;workbench.iconTheme&quot;: &quot;material-icon-theme&quot;,
+&quot;workbench.colorTheme&quot;: &quot;Dracula&quot;,
+&quot;editor.fontSize&quot;: 18,
+&quot;editor.lineHeight&quot;: 26,
+&quot;editor.fontFamily&quot;: &quot;Sarasa mono SC&quot;,
+&quot;terminal.integrated.fontSize&quot;: 16,
+&quot;terminal.integrated.lineHeight&quot;: 1.5,
+</code></pre>
+<h2 id="自动补全与格式">自动补全与格式</h2>
+<h3 id="pylance"><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">Pylance</a></h3>
+<p>Pylance 是微软新推出的 Python 语言服务器， 可以在插件库中安装，提供自动补全等功能。</p>
+<h3 id="yapf-代码格式化">yapf / 代码格式化</h3>
+<p>YAPF 是Google开源的一个用来格式化Python代码的工具，使用 <code>pip install yapf</code> 进行安装，首次在 VSCode 中按下快捷键 <code>Shift+Alt+F</code> 会弹窗选择格式化工具，之后可直接使用快捷键进行代码格式化，主要是注意代码缩进与 import 语句顺序等问题。</p>
+<h3 id="flake8-语法检查">flake8 / 语法检查</h3>
+<p>语法检查工具有很多，包括 flake8，pylint 等，同样使用 <code>pip install flake8</code> 进行安装。默认的语法要求太过严格，可以在 <code>settings.json</code> 中进行设置</p>
+<pre><code class="language-json">&quot;python.linting.flake8Enabled&quot;: true,
+&quot;python.linting.flake8Args&quot;: [
+    &quot;--max-line-length=120&quot;,
+    &quot;--ignore=E401 E402,F841,F401,F403,E302,E305,W504&quot;,
+]
+</code></pre>
+<h2 id="未完待续">未完待续...</h2>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/freesurfer-use/" class="post-title gt-a-link">
+                    Freesurfer操作文档
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

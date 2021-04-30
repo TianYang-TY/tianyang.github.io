@@ -1,0 +1,209 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>在vps上搭建Jupyter环境 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    在vps上搭建Jupyter环境
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-11-12 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/d-S3t1v6d/" class="post-tags">
+                            # Python
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/9w0RBX-XIZ/" class="post-tags">
+                            # Server
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>之前在吴恩达的深度学习课上接触了Jupyter，一直在本地使用，每次想启动都得打开PowerShell输入jupyter notebook的命令，启动后的目录下还包含路径下其他文件，很是不够方便。</p>
+<p>其实我一直有一个vps服务器默默工作在大洋彼岸，心想着可以在上面搭建个Jupyter环境，趁清明假期配置了一下。</p>
+<!-- more -->
+<h2 id="jupyter简介">Jupyter简介</h2>
+<blockquote>
+<p>（来自维基百科）Jupyter Notebook（前身是IPython Notebook）是一个基于Web的交互式计算环境，用于创建Jupyter Notebook文档。Notebook一词可以通俗地引用许多不同的实体，主要是Jupyter Web应用程序、Jupyter Python Web服务器或Jupyter文档格式（取决于上下文）。Jupyter Notebook文档是一个JSON文档，遵循版本化模式，包含一个有序的输入/输出单元格列表，这些单元格可以包含代码、文本（使用Markdown语言）、数学、图表和富媒体，通常以“.ipynb”结尾扩展。</p>
+</blockquote>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704076092.png" alt="" loading="lazy"></figure>
+<h2 id="搭建流程">搭建流程</h2>
+<p>演示系统为Debian 9 ×64，为了教程新建的实例，一切从零开始。为了方便，用户直接用了root，如果服务器里面有重要数据的话建议新建一个用户。</p>
+<p>使用ssh软件登录一下服务器。首先下载一下Anaconda，里面集成了很多常用的Python包，其中就有今天要用的Jupyter。Anaconda官网链接为：https://www.anaconda.com<br>
+然后使用wget命令把安装包下载下来。</p>
+<pre><code class="language-bash">wget https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+</code></pre>
+<figure data-type="image" tabindex="2"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704109611.png" alt="" loading="lazy"></figure>
+<p>之后使用</p>
+<pre><code class="language-bash">bash Anaconda3-2019.03-Linux-x86_64.sh
+</code></pre>
+<p>命令一路安装，选择默认安装路径或者自定义，等待安装完成。然后重启终端。输入<code>conda --version</code> 会得到conda版本号，代表安装成功。</p>
+<figure data-type="image" tabindex="3"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704291084.png" alt="" loading="lazy"></figure>
+<p>接下来输入Python进入Python环境，分别执行<code>from notebook.auth import passwd</code>与<code>passwd()</code>设置notebook密码。把生成的sha1那一串保存下来备用。退出Python环境。</p>
+<p>执行<code>jupyter notebook --generate-config</code>命令生成jupyter配置文件。<code>vim ~/.jupyter/jupyter_notebook_config.py</code>进入编辑。插入图中4行命令，最后一行的sha1为刚刚保存的sha1。保存并退出。</p>
+<figure data-type="image" tabindex="4"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704253410.png" alt="" loading="lazy"></figure>
+<p>然后就可以测试是否配置成功了。执行<code>jupyter notebook --allow-root</code> 。<code>--allow-root</code>是root用户才需要输入的部分。</p>
+<figure data-type="image" tabindex="5"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704235011.png" alt="" loading="lazy"></figure>
+<p>浏览器中输入你的<code>IP:端口</code>，能打开jupyter界面表示安装成功。密码是刚才自己设置的密码。</p>
+<figure data-type="image" tabindex="6"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704216247.png" alt="" loading="lazy"></figure>
+<p>如果想自定义默认目录的话需要再打开jupyter配置文件，加入一行<code>c.NotebookApp.notebook_dir = '自定义目录'</code>，不再演示了。</p>
+<p>接下来新建一个Python3文件，Hello World &amp; Hello CoolApk</p>
+<figure data-type="image" tabindex="7"><img src="https://raw.githubusercontent.com/TianYang-TY/myPic/master/1554704194866.png" alt="" loading="lazy"></figure>
+<p>最后回到终端，停掉现在的jupyter进程。为了将jupyter作为后台服务进行，同时不会收到当前终端的影响，将启动命令改为</p>
+<pre><code class="language-bash">nohup jupyter notebook --allow-root &amp;
+</code></pre>
+<h2 id="总结">总结</h2>
+<p>远程敲代码成就达成√</p>
+<p>手机敲代码成就达成√</p>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/tensorflow-gpu-env-under-windows/" class="post-title gt-a-link">
+                    Windows系统下TensorFlow-GPU环境搭建
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

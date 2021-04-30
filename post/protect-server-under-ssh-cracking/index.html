@@ -1,0 +1,266 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>服务器被SSH暴力破解解决方案 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    服务器被SSH暴力破解解决方案
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2019-07-07 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/9w0RBX-XIZ/" class="post-tags">
+                            # Server
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>服务器端使用Debian 9×64系统，发现大量不存在的用户名登陆失败记录，于是使用Fail2ban进行IP封禁。</p>
+<!-- more -->
+<h2 id="查看系统登录日志仅root用户">查看系统登录日志（仅root用户）</h2>
+<p><code>last|less</code>会返回一系列登录成功的记录，格式为</p>
+<pre><code>用户名+终端位置+IP地址+登录时间+在线时长
+root pts/1 IP Sat May 25 17:23 still logged in
+</code></pre>
+<p><code>lastb</code>会返回一系列登录失败的记录，格式为</p>
+<pre><code class="language-bash">steam1   ssh:notty    188.165.44.214   Sat May 25 06:19 - 06:19  (00:00)
+dan      ssh:notty    134.175.18.237   Sat May 25 06:19 - 06:19  (00:00)
+steam1   ssh:notty    188.165.44.214   Sat May 25 06:19 - 06:19  (00:00)
+12345678 ssh:notty    82.223.130.223   Sat May 25 06:18 - 06:18  (00:00)
+12345678 ssh:notty    82.223.130.223   Sat May 25 06:18 - 06:18  (00:00)
+tom1     ssh:notty    164.132.62.233   Sat May 25 06:18 - 06:18  (00:00)
+</code></pre>
+<pre><code class="language-bash"># 查看不存在的用户名登录失败的日志
+grep &quot;Failed password for invalid user&quot; /var/log/auth.log | awk '{print $13}' | sort | uniq -c | sort -nr | more
+# 查看root账户登录失败记录
+sudo grep &quot;Failed password for root&quot; /var/log/auth.log | awk '{print $11}' | sort | uniq -c | sort -nr | more
+</code></pre>
+<p>下面的登录失败记录只是冰山一角</p>
+<pre><code>199 92.50.249.166
+199 47.107.55.172
+199 195.114.210.238
+199 194.56.72.6
+199 159.89.149.46
+</code></pre>
+<h2 id="更改ssh端口">更改SSH端口</h2>
+<p>可以从输出结果看到这个服务器被攻击的相当频繁，还好之前改过SSH端口。</p>
+<pre><code class="language-bash"># 一键更改端口
+wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssh_port.sh &amp;&amp; chmod +x ssh_port.sh &amp;&amp; bash ssh_port.sh
+</code></pre>
+<p>下面是手动方法：</p>
+<p><code>vim /etc/ssh/sshd_config</code>打开SSH的配置文件，可以找到<code>#Port</code>字样，默认一般为22，非常不安全，将其注释去掉并在其后添加一行，即<code>Port ***</code>，添加新的SSH端口，在验证新端口好用后再将22端口注释掉。</p>
+<p>在修改端口之后需要重启SSH服务</p>
+<pre><code class="language-bash">/etc/init.d/sshd restart  //或者
+service sshd restart 
+</code></pre>
+<p>如果还是访问不通，需要进行防火墙配置</p>
+<pre><code class="language-bash">  /etc/init.d/iptables stop   //或者
+  service iptables stop     
+</code></pre>
+<p>或者在防火墙过滤规则中上增加一条，允许对新增的端口的访问：</p>
+<pre><code class="language-bash">vim /etc/sysconfig/iptables
+</code></pre>
+<pre><code>:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+***********
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 2022 -j ACCEPT
+***********
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre>
+<h2 id="fail2ban配置">Fail2ban配置</h2>
+<p>之前尝试使用过DenyHosts，其已经很长时间没有进行维护而且它用的Python2与服务器上部署的Python3有不兼容的现象，弃用。</p>
+<p><a href="%5Bhttps://www.fail2ban.org%5D(https://www.fail2ban.org/)">Fail2ban</a>是一款实用软件，可以监视你的系统日志，然后匹配日志的错误信息（正则式匹配）执行相应的屏蔽动作。一般需求的操作并不复杂，修改配置文件即可。</p>
+<p>安装</p>
+<p><code>apt-get install fail2ban</code></p>
+<p>打开配置文件</p>
+<p><code>vim /etc/fail2ban/jail.conf</code></p>
+<p>配置文件翻译如下：</p>
+<p><em>我并没有在服务器上配置邮件服务，也不需要邮件提醒，主要是修改前12行</em></p>
+<pre><code class="language-json">[DEFAULT]
+# 忽略的IP列表,不受设置限制
+ignoreip = 127.0.0.1/8 
+
+# 被封IP禁止访问的时间，单位是秒
+bantime = 60000
+
+# 检测时间，在此时间内超过规定的次数会激活fail2ban，单位是秒 
+findtime = 300
+
+# 允许错误登录的最大次数
+maxretry = 2
+</code></pre>
+<p>需要将Fail2ban设置为开机自启动</p>
+<pre><code class="language-bash"># 设置fail2ban开机启动
+systemctl enable fail2ban
+systemctl start fail2ban
+
+# 启动与重启fail2ban
+service fail2ban start
+service fail2ban restart
+</code></pre>
+<p>日志查看功能</p>
+<pre><code class="language-bash"># 查看最近100条记录 ps.可以配合grep筛选已Ban列表
+tail -100 /var/log/fail2ban.log
+</code></pre>
+<p>查看SSH服务监护状态，能看到当前被禁IP</p>
+<pre><code class="language-bash">fail2ban-client status sshd
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/apps-recommended/" class="post-title gt-a-link">
+                    装机用所有软件合集
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

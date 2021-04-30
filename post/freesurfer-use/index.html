@@ -1,0 +1,434 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Freesurfer操作文档 | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    Freesurfer操作文档
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-05-07 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/5JIqsTVwc/" class="post-tags">
+                            # Linux
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/4tKidSvhRh/" class="post-tags">
+                            # Ubuntu
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/nXH6UnePtt/" class="post-tags">
+                            # Freesurfer
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本文档的操作流程基于 Ububtu 18.04LTS 以及 Freesurfer 6.0，安装过程记录在另一篇文档 <em><a href="http://193824.xyz/post/zai-ubuntu1804lts-zhong-an-zhuang-freesurfer/">在 Ubuntu18.04LTS 中安装 FreeSurfer</a></em> 中。本文档操作全部在终端中进行，Freesurfer 的 GUI 仅用作查看操作结果。</p>
+<!-- more -->
+<blockquote>
+<p>创建于2020-03-07</p>
+<p>修改1：2020-03-08</p>
+<p>​    修正SUBJECTS_DIR的设置方法与单subject多图像的文件夹结构</p>
+<p>​    修正recon-all在单subject多图像情况下的命令</p>
+<p>修改2：2020-03-12</p>
+<p>​    删除修改1中增加的单subject多图像情况</p>
+<p>​    新增多图像的多线程处理内容</p>
+<p>修改3：2020-04-15</p>
+<p>​    新增DICOM转nii内容</p>
+<p>修改4：2020-04-17</p>
+<p>​    新增批处理提取统计学结果的内容</p>
+<p>修改5：2020-04-27</p>
+<p>​    新增PET处理内容</p>
+<p>修改6：2020-05-12</p>
+<p>​    加入PET后的批处理流程</p>
+<p>修改7：2020-07-23</p>
+<p>​    对PET分割限定线程数避免报错<br>
+补充了一些后续步骤</p>
+<p>修改8：2020-11-02<br>
+新增海马子区域分割流程</p>
+</blockquote>
+<h2 id="subjects_dir">SUBJECTS_DIR</h2>
+<p>首先需要用户自定义 <code>SUBJECTS_DIR</code>，不推荐使用放在 Freesurfer 安装目录下的默认文件夹，自定义 <code>SUBJECTS_DIR</code> 的命令如下：<strong>操作中严格避免中文路径的出现！！！</strong></p>
+<pre><code class="language-bash"># 设置到桌面上
+export SUBJECTS_DIR=/home/用户名/Desktop/Subjects
+# 快速设置为当前文件夹
+export SUBJECTS_DIR=$(pwd)
+
+# 查看当前SUBJECTS_DIR
+echo $SUBJECTS_DIR
+</code></pre>
+<p>在 <code>SUBJECTS_DIR</code> 下，可以直接放置 <code>sample-001.mgz, sample-002.mgz</code> 等文件。下方文件夹结构为分割完成后的文件夹结构：</p>
+<pre><code class="language-text">SUBJECTS_DIR
+├── sample-001
+│   ├── label
+│   ├── mri
+│   │   ├── orig
+│   │   └── transforms
+│   │       └── bak
+│   ├── scripts
+│   ├── stats
+│   ├── surf
+│   ├── tmp
+│   ├── touch
+│   └── trash
+└── sample-002
+    ├──...
+</code></pre>
+<h2 id="recon-all">recon-all</h2>
+<p><code>recon-all</code> 为 Freesurfer 的核心命令，使用命令 <code>recon-all --help</code> 可以查看详细帮助。在操作时可以使用以下命令切换到 <code>SUBJECTS_DIR</code> 下并执行 <code>recon-all</code>，如果需要同时处理多个图像，可以使用后面提到的 <a href="#parallel">Parallel</a>；如果需要处理文件夹形式的 DICOM 图像，可先用 <a href="#dcm2niix">dcm2niix</a> 转换成 nii 格式。</p>
+<pre><code class="language-bash">cd $SUBJECTS_DIR
+# bert 是可自己设置的 subject 名字
+recon-all -s bert -i sample-001.mgz -all
+</code></pre>
+<p>上面的命令成功执行后会持续数个小时，处理结果会分类存放在上一部分列出的文件夹结构中。</p>
+<h2 id="freeview">freeview</h2>
+<p>在终端中输入 <code>freeview</code> 进入 GUI，然后通过 <code>File - Load Volume</code> 加载 <code>mri -&gt; T1.mgz / aseg.mgz / wm.mgz / brainmask.mgz</code>，<code>aseg.mgz</code>是灰质白质等解构的分割结果，可以选择 Color map 为 Lookup Table 并调低透明度进行观察。</p>
+<p>recon-all的结果中还包含了曲面信息，使用 <code>File - Load Surface</code> 加载 <code>surf -&gt; lh.pial / lh.white / lh.inflated</code> 以及对应的右脑文件 <code>surf -&gt; rh.pial / rh.white / rh.inflated</code>。</p>
+<p>下面的命令行操作与上面的结果完全相同，无需重复操作：</p>
+<pre><code class="language-bash">$&gt; freeview -v \
+    bert/mri/T1.mgz \
+    bert/mri/wm.mgz \
+    bert/mri/brainmask.mgz \
+    bert/mri/aseg.mgz:colormap=lut:opacity=0.2 \
+    -f \
+    bert/surf/lh.white:edgecolor=blue \
+    bert/surf/lh.pial:edgecolor=red \
+    bert/surf/rh.white:edgecolor=blue \
+    bert/surf/rh.pial:edgecolor=red
+</code></pre>
+<h2 id="stats">stats</h2>
+<p>Freesurfer的 <code>recon-all</code> 命令已经处理的MR数据的体积以及皮层厚度信息，使用 <code>asegstats2table, aparcstats2table</code> 两个命令可以分别提取出。体积与皮层厚度结果均是按照已经分割好的脑区进行统计，皮层厚度只能对左脑和右脑分别输出。另外，这两个命令仅能输出txt格式文档，查看时需要使用excel进行转换。使用命令如下：</p>
+<pre><code class="language-bash"># https://surfer.nmr.mgh.harvard.edu/fswiki/asegstats2table
+asegstats2table --subjects bert --common-segs --meas volume --stats=aseg.stats --table=segststs.txt
+
+# https://surfer.nmr.mgh.harvard.edu/fswiki/aparcstats2table
+# aparcstats2table 需要分别提取左右脑的结果
+aparcstats2table --subjects bert --hemi lh --meas thickness --parc=aparc --tablefile=aparc.txt
+aparcstats2table --subjects bert --hemi rh --meas thickness --parc=aparc --tablefile=aparc.txt
+</code></pre>
+<h2 id="span-idparallelparallelspan"><span id="parallel">Parallel</span></h2>
+<p>Freesurfer 本身无法同时对多个图像（多个 subjects ）进行计算，为了充分利用电脑的多核性能节省计算时间，需借助一个多线程工具，名为 GNU Parallel。Parallel 在 Ubuntu下可以直接使用 <code>sudo apt-get install parallel</code> 进行安装。多线程进行 recon-all 的命令如下，使用此方法会将每个图像的文件名作为分割该图像时的subject名字。执行此命令时可能没有信息在终端输出，执行完成后会一次性输出，如需查看进行状态，可以到 <code>./scripts/recon-all.log</code> 查看 recon-all 日志.</p>
+<pre><code class="language-bash"># mgz 为后缀，需要指定参与 CPU 参与计算的核心数则在 parallel 后加：--jobs 核心数
+ls *.mgz | parallel recon-all –s {.} –i {} –all
+
+# 统计数据提取也可以使用 Parallel
+ls *.nii | parallel asegstats2table --subjects {.} --common-segs --meas volume --stats=aseg.stats --table=segststs_{.}.txt
+ls *.nii | parallel aparcstats2table --subjects {.} --hemi lh --meas thickness --parc=aparc --tablefile=aparc_{.}_lh.txt
+ls *.nii | parallel aparcstats2table --subjects {.} --hemi rh --meas thickness --parc=aparc --tablefile=aparc_{.}_rh.txt
+</code></pre>
+<p>对于上述 Parallel 导出的一系列统计txt文件，我编写了 python 程序转换成更易读的 csv 文件，将下面的文件保存为 <code>txt2csv.py</code> 然后放在当前的 <code>SUBJECTS_DIR</code> 下，在终端中执行 <code>python txt2csv.py</code> 即可进行转换。</p>
+<pre><code class="language-python">import csv
+import os
+
+
+def txt2csv(inputfile, outputfile):
+    datacsv = open(outputfile, 'w')
+    csvwriter = csv.writer(datacsv, dialect=(&quot;excel&quot;))
+    mainfileH = open(inputfile, 'rb')
+    for line in mainfileH.readlines():
+        # print &quot;Debug: &quot; + line.replace('\n', '')
+        csvwriter.writerow([a for a in line.decode().split('\t')])
+    datacsv.close()
+    mainfileH.close()
+
+
+if __name__ == &quot;__main__&quot;:
+    txt_list = [
+        x for x in os.listdir('.')
+        if os.path.isfile(x) and os.path.splitext(x)[1] == '.txt'
+    ]
+    for txt in txt_list:
+        outputfile = txt.split('txt')[0] + 'csv'
+        txt2csv(txt, outputfile)
+
+</code></pre>
+<h2 id="span-iddcm2niixdcm2niixspan"><span id="dcm2niix">dcm2niix</span></h2>
+<p>recon-all 命令无法对文件夹形式的 DICOM 图像直接进行处理，借用 <a href="https://github.com/rordenlab/dcm2niix">dcm2niix</a> 库以及 parallel 可以进行批量转换。dcm2niix 默认将转换结果放到原 DICOM 文件夹内，不方便后续处理，所以用设置 <code>-o</code> 参数指定输出文件夹。</p>
+<pre><code class="language-bash"># 安装
+sudo apt-get install pigz dcm2niix
+
+# 使用
+# 将多个 DICOM 文件夹放到同一目录下，并避免有其他非 DICOM 文件
+ls | parallel dcm2niix -o 目标输出文件夹 {}
+</code></pre>
+<h2 id="petsurfer"><a href="https://surfer.nmr.mgh.harvard.edu/fswiki/PetSurfer">PETSurfer</a></h2>
+<p>PETSurfer 是 Freesurfer 6 中引入的新功能，包含部分容积校正以及力学建模等功能。</p>
+<ol>
+<li>
+<p>创建一个分割</p>
+<pre><code class="language-bash"># 替换 SUBJECT
+gtmseg --s SUBJECT
+</code></pre>
+<p>此步操作会使用生成一个高精度的分割结果 <code>SUBJECT/mri/gtmseg.mgz</code> ，使用到原来的 <code>ageg.mgz</code> 提供皮层下结构，使用 <code>?h.aparc.annot</code> 提供皮层结构，还将估计一些额外的脑结构。</p>
+</li>
+<li>
+<p>PET 配准到 MR</p>
+<pre><code class="language-bash"># 替换 PET_IMAGE, template名字也可以修改
+# PET_IMAGE 为PET路径/PET文件名
+mri_coreg --s subject --mov PET_IMAGE --reg template.reg.lta
+</code></pre>
+<p>检查配准结果使用以下命令：</p>
+<pre><code class="language-bash">tkregisterfv --mov PET_IMAGE --reg template.reg.lta --surfs
+</code></pre>
+</li>
+<li>
+<p>部分容积校正</p>
+<pre><code class="language-bash"># 其中 PET_IMAGE FWHM 均需要替换
+# PET_IMAGE 为PET路径/PET文件名
+# 如果不需要参考脑桥代谢值，可以再命令中补充 --no-rescale
+# FWHM 取决于设备，医大一院用的2.8
+mri_gtmpvc --i PET_IMAGE --reg template.reg.lta --psf 2.8 --seg gtmseg.mgz --default-seg-merge  --auto-mask PSF .01 --mgx .01 --o gtmpvc.output 
+</code></pre>
+</li>
+</ol>
+<pre><code>   
+官网对各参数的解释如下：
+   
+   &gt;--psf FWHM is the full-width/half-max of the the point-spread function (PSF) of the scanner as measured in image space (also known as the burring function). The blurring function depends on the scanner and reconstruction method; here it is modeled as an isotropic Gaussian filter of the given FWHM. Eg, an HR+ is typically about 6mm. This parameter has nothing to do with applying smoothing. Set this to 0 to turn off PVC. If you don't know what to set this to, ask your PET physicist.
+   &gt;--seg gtmseg.mgz is the segmentation created with gtmseg
+   &gt;--default-seg-merge will merge several segmentations, eg, all the ventricular CSF segments will be merged into one ROI
+   &gt;--auto-mask FWHM .01 will create a mask to exclude voxels from the analysis (saves time). Output volumes will be reduced to a bounding box around this mask (saves space)
+   &gt;--mgx .01 Run Muller-Gartner analysis. 01 is the GM threshold. Only necessary if you want to do a voxel-wise analysis.
+   &gt;--o gtmpvc.output This is the output folder.
+</code></pre>
+<p>此步生成了一个文件 <code>./gtmpvc.output/gtm.stats</code> ，里面存放了各个 ROI 的代谢信息，阅读参考如下内容：</p>
+<blockquote>
+<p>9 17 Left-Hippocampus subcort_gm 473 174.083 1.406 0.1216</p>
+<p>9 = ninth row<br>
+17 = index for ROI<br>
+Left-Hippocampus = name of ROI<br>
+subcort_gm = tissue class<br>
+473 = number of PET voxels in the ROI<br>
+174 = variance reduction factor for ROI (based on GLM/SGTM)<br>
+1.406 = PVC uptake of ROI relative to Pons<br>
+0.1216 = resdiual varaince across voxels in the ROI</p>
+</blockquote>
+<h2 id="引入pet后的批处理">引入PET后的批处理</h2>
+<p>简单的PET批处理方法需要从转DICOM开始进行操作。首先切换到在目标目录打开终端并设置为<code>SUBJECTS_DIR</code> ，并建立两个存放DICOM的文件夹，然后分别讲MR和PET图像存进去：</p>
+<pre><code class="language-bash">export SUBJECTS_DIR=$(pwd)
+# 分别为PET图像和MR图像建立一个名为PET和MR的文件夹，分隔开
+mkdir MR
+mkdir PET
+</code></pre>
+<p>下面开始转换格式，转换的nii使用人名命名，<strong>如果有空格或者重复人名需要手动修正</strong>。</p>
+<pre><code class="language-bash"># 切换到MR文件夹，输出文件直接放到 SUBJECTS_DIR
+cd MR
+ls | parallel dcm2niix -o $SUBJECTS_DIR -f %n -b n {}
+
+# 切换到PET文件夹
+cd ../PET
+ls | parallel dcm2niix -o $(pwd) -f pet_%n -b n {}
+
+# 返回 SUBJECTS_DIR
+cd ..
+</code></pre>
+<p>然后对MR进行分割</p>
+<pre><code class="language-bash">#此时目录应该是SUBJECTS_DIR
+ls *.nii | parallel recon-all –s {.} –i {} –all
+</code></pre>
+<p>然后处理PET，各命令含义见上一节：</p>
+<pre><code class="language-bash">ls *.nii | parallel --jobs 4 gtmseg --s {.}
+
+ls *.nii | parallel mri_coreg --s {.} --mov PET/pet_{} --reg {.}.reg.lta
+# 配准结果检查不使用批处理
+
+# 如果不需要参考脑桥代谢值，可以再命令中补充 --no-rescale
+# FWHM 需要指定一个值
+ls *.nii | parallel --jobs 4 mri_gtmpvc --i PET/pet_{} --reg {.}.reg.lta --psf FWHM --seg gtmseg.mgz --default-seg-merge  --auto-mask PSF .01 --mgx .01 --o {.}_gtmpvc.output 
+</code></pre>
+<p>提取recon-all的统计结果</p>
+<pre><code class="language-bash">mkdir asegStats
+ls *.nii | parallel asegstats2table --subjects {.} --common-segs --meas volume --stats=aseg.stats --table=./asegStats/{.}_segststs.txt
+
+# https://surfer.nmr.mgh.harvard.edu/fswiki/aparcstats2table
+# aparcstats2table 需要分别提取左右脑的结果
+mkdir aparcStats
+ls *.nii | parallel aparcstats2table --subjects {.} --hemi lh --meas thickness --parc=aparc --tablefile=./aparcStats/{.}_aparc_lh.txt
+ls *.nii | parallel aparcstats2table --subjects {.} --hemi rh --meas thickness --parc=aparc --tablefile=./aparcStats/{.}_aparc_rh.txt
+</code></pre>
+<p>提取 gtmseg 及其统计结果</p>
+<pre><code class="language-bash">mkdir gtmseg
+ls *.nii | parallel cp ./{.}/mri/gtmseg.mgz ./gtmseg/{.}_gtmseg.mgz
+
+mkdir gtmVolume
+ls *.nii | parallel asegstats2table --subjects {.} --common-segs --meas volume --stats=gtmseg.stats --table=./gtmVolume/{.}_gtmVolume.txt
+</code></pre>
+<p>提取PET处理结果 gtm.stats.dat</p>
+<pre><code class="language-bash">mkdir gtmStats
+ls *.nii | parallel cp ./{.}_gtmpvc.output/gtm.stats.dat ./gtmStats/{.}.gtm.stats.dat
+</code></pre>
+<h2 id="海马子区域分割"><a href="https://surfer.nmr.mgh.harvard.edu/fswiki/HippocampalSubfields">海马子区域分割</a></h2>
+<p>进行此步骤的前提是正确安装了matlab runtime，然后只需要执行 <code>recon-all</code> 命令</p>
+<p>如果是一个新的待分割数据，需要重新开始 <code>recon-all</code> 过程</p>
+<pre><code class="language-bash"> # bert可以自定义
+ recon-all -all -s bert -hippocampal-subfields-T1
+</code></pre>
+<p>如果之前进行过 <code>recon-all</code> 分割，只需要执行</p>
+<pre><code class="language-bash"># bert为原来的subject名称
+recon-all -s bert -hippocampal-subfields-T1
+</code></pre>
+<p>分割结果存放在文件夹 <code>$SUBJECTS_DIR/bert/mri/</code>中，可以使用freeview查看分割结果</p>
+<pre><code class="language-bash">cd ./bert/mri
+freeview -v nu.mgz -v lh.hippoSfLabels-T1.v10.mgz:colormap=lut -v rh.hippoSfLabels-T1.v10.mgz:colormap=lut
+</code></pre>
+<p>有关分割结果的介绍，fs文档原文如下</p>
+<blockquote>
+<p>The output will consist of six files (three for each hemisphere) that can be found under the subject's mri directory (in this example, $SUBJECTS_DIR/bert/mri/):</p>
+<p><em>[lr]h.hippoSfLabels-T1.v10.mgz</em>: they store the discrete segmentation volume (lh for the left hemisphere, rh for the right) at 0.333 mm resolution.</p>
+<p><em>[lr]h.hippoSfLabels-T1.v10.FSvoxelSpace.mgz</em>: they store the discrete segmentation volume in the <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurfer">FreeSurfer</a> voxel space (normally 1mm isotropic, unless higher resolution data was used in recon-all with the flag -cm).</p>
+<p><em>[lr]h.hippoSfVolumes-T1.v10.txt</em>: these text files store the estimated volumes of the subfields and of the whole hippocampi.</p>
+<p>Note that [lr]h.hippoSfLabels-T1.v10.mgz covers only a patch around the hippocampus, at a higher resolution than the input image. The segmentation and the image are defined in the same physical coordinates, so you can visualize them simultaneously with (run from the subject's mri directory):</p>
+<p>On the other hand [lr]h.hippoSfLabels-T1.v10.FSvoxelSpace.mgz lives in the same voxel space as the other <a href="https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurfer">FreeSurfer</a> volumes (e.g., orig.mgz, nu.mgz, aseg.mgz), so you can use it directly to produce masks for further analyses, but its resolution is lower than that of [lr]h.hippoSfLabels-T1.v10.mgz.</p>
+</blockquote>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/install-freesurfer-on-ubuntu1804lts/" class="post-title gt-a-link">
+                    在Ubuntu18.04LTS中安装FreeSurfer
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>

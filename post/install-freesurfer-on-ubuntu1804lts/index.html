@@ -1,0 +1,366 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+<meta name="description" content=""/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>在Ubuntu18.04LTS中安装FreeSurfer | Yang&#39;s blog</title>
+
+<link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1619768861129">
+
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://yangt.me/styles/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets/highlight.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dockerfile.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.15.10/languages/dart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"></script>
+<!-- DEMO JS -->
+<!--<script src="media/scripts/index.js"></script>-->
+
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.css">
+</head>
+<body>
+<div class="main gt-bg-theme-color-first">
+    <nav class="navbar navbar-expand-lg">
+    <div class="navbar-brand">
+        <img class="user-avatar" src="/images/avatar.png" alt="头像">
+        <div class="site-name gt-c-content-color-first">
+            Yang&#39;s blog
+        </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars gt-c-content-color-first" style="font-size: 18px"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="navbar-nav mr-auto" style="text-align: center">
+            
+                <div class="nav-item">
+                    
+                        <a href="/" class="menu gt-a-link">
+                            首页
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/archives" class="menu gt-a-link">
+                            归档
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/tags" class="menu gt-a-link">
+                            标签
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="/post/about" class="menu gt-a-link">
+                            关于
+                        </a>
+                    
+                </div>
+            
+                <div class="nav-item">
+                    
+                        <a href="friends" class="menu gt-a-link">
+                            友链
+                        </a>
+                    
+                </div>
+            
+        </div>
+        <div style="text-align: center">
+            <form id="gridea-search-form" style="position: relative" data-update="1619768861129" action="/search/index.html">
+                <input class="search-input" autocomplete="off" spellcheck="false" name="q" placeholder="搜索文章" />
+                <i class="fas fa-search gt-c-content-color-first" style="position: absolute; top: 9px; left: 10px;"></i>
+            </form>
+        </div>
+    </div>
+</nav>
+
+    <div class="post-container">
+        <div class="post-detail gt-bg-theme-color-second">
+            <article class="gt-post-content">
+                <h2 class="post-title">
+                    在Ubuntu18.04LTS中安装FreeSurfer
+                </h2>
+                <div class="post-info">
+                    <time class="post-time gt-c-content-color-first">
+                        · 2020-02-18 ·
+                    </time>
+                    
+                        <a href="https://yangt.me/tag/5JIqsTVwc/" class="post-tags">
+                            # Linux
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/4tKidSvhRh/" class="post-tags">
+                            # Ubuntu
+                        </a>
+                    
+                        <a href="https://yangt.me/tag/nXH6UnePtt/" class="post-tags">
+                            # Freesurfer
+                        </a>
+                    
+                </div>
+                <div class="post-content">
+                    <p>本文档主要参考了<a href="https://surfer.nmr.mgh.harvard.edu/fswiki/DownloadAndInstall">FreeSurfer官方教程</a>以及CSDN上的一篇文章<a href="https://blog.csdn.net/qq_32696375/article/details/84024326">Ubuntu 18.04安装FreeSurfer软件</a>。由于系统与软件的更新迭代，必须进行一些额外的操作才能够成功安装。</p>
+<!-- more -->
+<blockquote>
+<p>修改1：2020-02-19</p>
+<p>​    根据相关教程增加了freesurfer 6.0的补丁包安装步骤</p>
+<p>修改2：2020-03-02</p>
+<p>​    在使用过程中发现freesurfer依赖python环境，需要安装，补充在额外操作-Python版本中</p>
+<p>修改3：2020-03-14</p>
+<p>​    修改了一些输入错误</p>
+<p>修改4：2020-08-03</p>
+<p>​    新增清华镜像以及dcm2niix等库</p>
+<p>修改5：2020-11-02</p>
+<p>新增Matlab Runtime配置</p>
+</blockquote>
+<h2 id="下载freesurfer">下载FreeSurfer</h2>
+<p>官网给出了下载链接以及系统需求</p>
+<p>Ubuntu里使用命令下载：</p>
+<pre><code class="language-bash">wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0/freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+</code></pre>
+<p>将下载数据移动到/usr/local文件夹下并解压：</p>
+<pre><code class="language-bash">sudo mv freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz /usr/local
+cd /usr/local
+sudo tar xzvf freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0.tar.gz
+</code></pre>
+<h2 id="获取license">获取license</h2>
+<p>获取license的链接为：<a href="https://surfer.nmr.mgh.harvard.edu/registration.html"><em>FreeSurfer</em> Download and Registration</a>，注册后邮箱会收到<code>license.txt</code>文件，复制其中内容。</p>
+<p>创建license文本然后粘贴license内容：</p>
+<pre><code class="language-bash">sudo touch freesurfer/license.txt
+sudo su
+cd /usr/local/freesurfer
+gedit license.txt
+</code></pre>
+<h2 id="配置环境变量">配置环境变量</h2>
+<p>输入以下指令：</p>
+<pre><code class="language-bash">sudo gedit  /etc/profile
+</code></pre>
+<p>在打开文件的最后输入以下语句：</p>
+<pre><code class="language-bash">export FREESURFER_HOME=/usr/local/freesurfer
+</code></pre>
+<p>输入以下指令：</p>
+<pre><code class="language-bash">sudo gedit  /etc/bash.bashrc
+</code></pre>
+<p>在打文件最后输入以下语句：</p>
+<pre><code class="language-bash">export FREESURFER_HOME=/usr/local/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
+</code></pre>
+<hr>
+<p>期间如果出现如下提示忽略即可：</p>
+<pre><code class="language-bash">Set document metadata failed: 不支持设置属性 metadata::gedit-encoding
+</code></pre>
+<p>经过上述环境变量设置之后，每次启动终端都会有FreeSurfer的相关信息输出：</p>
+<pre><code class="language-bash">-------- freesurfer-Linux-centos6_x86_64-stable-pub-v6.0.0-2beb96c --------
+Setting up environment for FreeSurfer/FS-FAST (and FSL)
+FREESURFER_HOME   /usr/local/freesurfer
+FSFAST_HOME       /usr/local/freesurfer/fsfast
+FSF_OUTPUT_FORMAT nii.gz
+SUBJECTS_DIR      /usr/local/freesurfer/subjects
+MNI_DIR           /usr/local/freesurfer/mni
+</code></pre>
+<h2 id="额外操作">额外操作</h2>
+<h3 id="缺少的库">缺少的库</h3>
+<p>由于我操作的Ubuntu系统之前从未使用过，在启动FreeSurfer时会出现报错，提示缺少库文件，比如：</p>
+<pre><code class="language-bash"># 缺少tcsh
+bash: /usr/local/freesurfer/bin/recon-all: /bin/tcsh: 解释器错误: 没有那个文件或目录
+# 缺少libpng12
+freeview.bin: error while loading shared libraries: libpng12.so.0: cannot open shared object file: No such file or directory
+# 缺少libjpg
+freeview.bin: error while loading shared libraries: libjpeg.so.62: cannot open shared object file: No such file or directory
+</code></pre>
+<p>其中tcsh与libjpd可以直接安装，在Ubuntu 16.10+的系统中，libpng12已经被弃用，无法直接安装，需要手动下载编译，在进行操作前建议将 Ubuntu 镜像替换为 <a href="https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/">清华镜像</a> 。</p>
+<pre><code class="language-bash"># 替换镜像之后
+sudo apt update
+sudo apt upgrade
+sudo apt install tcsh libjpeg62 dcm2niix htop
+wget http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb
+sudo dpkg -i libpng12-0_1.2.54-1ubuntu1_amd64.deb
+</code></pre>
+<h3 id="python版本">Python版本</h3>
+<p>在对<code>recon-all</code>命令得到的结果进行统计学分析是使用到了两个命令<code>asegstats2table</code>，<code>aparcstats2table</code>，这两个命令直接执行会报错：<code>/usr/bin/env: &quot;python&quot;: 没有那个文件或目录</code>，这是因为在我使用的Ubuntu18.04LTS中，默认的python为python3而且需要使用命令<code>python3</code>调出，解决这个问题可以将<code>python</code>命令绑定为<code>python3</code>，但是网络上查到的和freesurfer有关的内容均使用了python2，因此直接安装python2即可解决问题。</p>
+<pre><code class="language-bash">sudo apt-get install python
+</code></pre>
+<p>Tips：在安装是如果提示：</p>
+<pre><code class="language-bash">E: 无法获得锁 /var/lib/dpkg/lock-frontend - open (11: 资源暂时不可用)
+E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+</code></pre>
+<p>参考一篇<a href="https://www.cnblogs.com/python-wen/p/11023944.html">博客</a>的内容，两种解决方法：</p>
+<pre><code class="language-bash"># 杀掉apt-get进程：
+ps aux | grep apt-get
+sudo kill PID
+# 强制解锁：
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock
+
+# 经检验第二种方法有用，在使用第二种方法后如果仍然出现报错，但是查看进程发现并没有apt-get进程信息，此时通过重启系统，再重新安装软件，发现可以成功安装。
+</code></pre>
+<p>以上是我在安装过程中遇到的库缺失情况，实际操作中需要根据报错查看缺失库的详情</p>
+<h2 id="用例测试">用例测试</h2>
+<p>测试FreeSurfer能否正常工作可以直接使用官方的例程：</p>
+<p>FreeSurfer comes with two sample data files (sample-001.mgz and sample-002.mgz) as well as a fully recon-ed subject named bert. These data files can be used to test that your FreeSurfer installation was done properly. To test your installation, please try the following examples:</p>
+<p><strong>Example 1:</strong> Convert the sample-001.mgz to nifti format.</p>
+<pre><code>$&gt; cp $FREESURFER_HOME/subjects/sample-001.mgz .
+$&gt; mri_convert sample-001.mgz sample-001.nii.gz
+...
+reading from sample-001.mgz...
+TR=7.25, TE=3.22, TI=600.00, flip angle=7.00
+i_ras = (-0, -1, -0)
+j_ras = (-0, 0, -1)
+k_ras = (-1, 0, 0)
+writing to sample-001.nii.gz...
+</code></pre>
+<p><strong>Example 2:</strong> Perform a full recon-all on the nifti file.</p>
+<pre><code>$&gt; export SUBJECTS_DIR=&lt;path to subject directory&gt;
+$&gt; recon-all -i sample-001.nii.gz -s bert -all (creates a folder called bert in SUBJECTS_DIR)
+</code></pre>
+<p><strong>Example 3:</strong> Perform a full recon-all on a pre-existing subject folder</p>
+<pre><code>$&gt; export SUBJECTS_DIR=&lt;path to subject directory&gt;
+$&gt; recon-all -s bert -all
+</code></pre>
+<p><strong>Example 4:</strong> View the output volumes, surfaces and subcortical segmentation of the fully recon-ed subject bert.</p>
+<pre><code>$&gt; cd $SUBJECTS_DIR
+$&gt; freeview -v \
+    bert/mri/T1.mgz \
+    bert/mri/wm.mgz \
+    bert/mri/brainmask.mgz \
+    bert/mri/aseg.mgz:colormap=lut:opacity=0.2 \
+    -f \
+    bert/surf/lh.white:edgecolor=blue \
+    bert/surf/lh.pial:edgecolor=red \
+    bert/surf/rh.white:edgecolor=blue \
+    bert/surf/rh.pial:edgecolor=red
+# 正常的话应该出现加载完成示例图像的GUI
+</code></pre>
+<h2 id="补丁包">补丁包</h2>
+<p>由于6.0.0版本部分指令运行时存在bug，因此先打好补丁避免遇到类似问题。下载freesurfer 6.0.0 patch：<a href="ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/">6.0.0 patch地址</a></p>
+<p>如果需要其他版本补丁的下载，也可以在这个网站去查询对应版本是否发布patch包：<a href="ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer">freesurfer</a></p>
+<p>根据readme文件的说明，分别备份freesurfer下这些指令的文件，然后将补丁文件复制过去覆盖即可，Terminal下输入：</p>
+<pre><code class="language-bash">wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/make_average_subject
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/make_average_surface
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/mri_aparc2aseg.linux
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/mri_glmfit-sim
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/mri_segstats.linux
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/mris_anatomical_stats.linux
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/recon-all
+wget ftp://surfer.nmr.mgh.harvard.edu/pub/dist/freesurfer/6.0.0-patch/vol2subfield
+
+sudo cp $FREESURFER_HOME/bin/make_average_subject $FREESURFER_HOME/bin/make_average_subject.backup
+sudo cp make_average_subject $FREESURFER_HOME/bin/make_average_subject
+
+sudo cp $FREESURFER_HOME/bin/make_average_surface $FREESURFER_HOME/bin/make_average_surface.backup
+sudo cp make_average_surface $FREESURFER_HOME/bin/make_average_surface
+
+sudo cp $FREESURFER_HOME/bin/mri_aparc2aseg $FREESURFER_HOME/bin/mri_aparc2aseg.backup
+sudo cp mri_aparc2aseg.linux $FREESURFER_HOME/bin/mri_aparc2aseg
+
+sudo cp $FREESURFER_HOME/bin/mri_glmfit-sim $FREESURFER_HOME/bin/mri_glmfit-sim.backup
+sudo cp mri_glmfit-sim $FREESURFER_HOME/bin/mri_glmfit-sim
+
+sudo cp $FREESURFER_HOME/bin/mri_segstats $FREESURFER_HOME/bin/mri_segstats.backup
+sudo cp mri_segstats.linux $FREESURFER_HOME/bin/mri_segstats
+
+sudo cp $FREESURFER_HOME/bin/mris_anatomical_stats $FREESURFER_HOME/bin/mris_anatomical_stats.backup
+sudo cp mris_anatomical_stats.linux $FREESURFER_HOME/bin/mris_anatomical_stats
+
+sudo cp $FREESURFER_HOME/bin/recon-all $FREESURFER_HOME/bin/recon-all.backup
+sudo cp recon-all $FREESURFER_HOME/bin/recon-all
+
+# 原freesurfer中好像没有vol2subfield，无需备份直接拷贝即可
+sudo cp vol2subfield $FREESURFER_HOME/bin/vol2subfield
+</code></pre>
+<h2 id="matlab-runtime">Matlab Runtime</h2>
+<p><a href="https://surfer.nmr.mgh.harvard.edu/fswiki/MatlabRuntime">Freesurfer关于Matlab Runtime的文档</a> 使用 <code>fs_install_mcr</code> 自动安装需要的Matlab，步骤如下</p>
+<pre><code class="language-bash"># 首次需要安装fs_install_mcr 
+cd $FREESURFER_HOME/bin
+sudo curl https://raw.githubusercontent.com/freesurfer/freesurfer/dev/scripts/fs_install_mcr -o fs_install_mcr &amp;&amp; chmod +x fs_install_mcr
+# FS 6.0版本下载 Matlab r2012b
+fs_install_mcr R2012b
+</code></pre>
+<p>但是我在执行过程中遇到上面的命令无法下载Matlab安装包就报错了，另一个方案就是手动去 <a href="https://ww2.mathworks.cn/help/compiler_sdk/dotnet/install-the-matlab-runtime.html">matlab官网</a> 下载 r2012b linux版，下面可以执行命令进行下载。</p>
+<pre><code class="language-bash"># 新建一个文件夹进行操作
+mkdir matlab
+cd matlab
+wget https://ssd.mathworks.com/supportfiles/MCR_Runtime/R2012b/MCR_R2012b_glnxa64_installer.zip
+unzip MCR_R2012b_glnxa64_installer.zip
+sudo ./install -mode silent -agreeToLicense yes
+</code></pre>
+<p>然后需要将matlab的安装目录通过软链接映射到Freesurfer的目录下，matlab安装目录默认为 <code>/usr/local/MATLAB/MATLAB_Compiler_Runtime</code></p>
+<pre><code class="language-bash">cd $FREESURFER_HOME
+ln -s /usr/local/MATLAB/MATLAB_Compiler_Runtime/v80 MCRv80
+</code></pre>
+
+                </div>
+            </article>
+        </div>
+
+        
+            <div class="next-post">
+                <div class="next gt-c-content-color-first">下一篇</div>
+                <a href="https://yangt.me/post/reconnect-wifi/" class="post-title gt-a-link">
+                    WIFI断连自动连接脚本
+                </a>
+            </div>
+        
+
+        
+
+        
+
+        
+
+        <div class="site-footer gt-c-content-color-first">
+    <div class="slogan gt-c-content-color-first">苟利国家生死以，岂因祸福避趋之🕶</div>
+    <div class="social-container">
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </div>
+    <div class="footer-info">
+        Copyright &copy; 2019-<span id="footerYear">2019</span> Yang Tian. All rights reserved.
+<script type="text/javascript">
+document.getElementById('footerYear').innerHTML = new Date().getFullYear();
+</script>
+    </div>
+    <div>
+        Theme by <a href="https://imhanjie.com/" target="_blank">imhanjie</a>, Powered by <a
+                href="https://github.com/getgridea/gridea" target="_blank">Gridea | <a href="https://yangt.me/atom.xml" target="_blank">RSS</a></a>
+    </div>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+</script>
+
+    </div>
+</div>
+</body>
+</html>
