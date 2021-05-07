@@ -4,7 +4,7 @@
 <meta name="description" content=""/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-<title>Windows系统下TensorFlow-GPU环境搭建 | Yang&#39;s blog</title>
+<title>上下对等千兆教育网冲浪指南 | Yang&#39;s blog</title>
 
 <link rel="shortcut icon" href="https://yangt.me/favicon.ico?v=1620370343144">
 
@@ -97,15 +97,15 @@
         <div class="post-detail gt-bg-theme-color-second">
             <article class="gt-post-content">
                 <h2 class="post-title">
-                    Windows系统下TensorFlow-GPU环境搭建
+                    上下对等千兆教育网冲浪指南
                 </h2>
                 <div class="post-info">
                     <time class="post-time gt-c-content-color-first">
-                        · 2019-09-28 ·
+                        · 2020-10-18 ·
                     </time>
                     
-                        <a href="https://yangt.me/tag/x7QpQxXAv/" class="post-tags">
-                            # Tensorflow
+                        <a href="https://yangt.me/tag/Qrkgq0Jdy/" class="post-tags">
+                            # Software
                         </a>
                     
                         <a href="https://yangt.me/tag/6KHiJEdvJL/" class="post-tags">
@@ -114,60 +114,25 @@
                     
                 </div>
                 <div class="post-content">
-                    <p>以 Windows 7 SP1 专业版系统为例，进行 Windows 下 TensorFlow GPU 环境的配置，尽可能复现课题组 Ubuntu 服务器中的版本。</p>
+                    <p>坐标北方某大学，学校内教学楼WiFi全覆盖，寝室和实验室都有网口，实测速率可以达到上下对等的千兆速率，校内数据传输不计费，在有线网下会分配到一个固定的IP地址，这么棒的资源肯定要利用起来。教育网与普通运营商网很大的不同是学校内相当于一个大路由器，接入学校网络的设备可以自由访问校内IP地址，校外设备无法访问，我下面进行的操作也很大程度上基于此条件，也不需要购买服务器进行内网穿透。</p>
 <!-- more -->
-<h2 id="1-anaconda3">1.  Anaconda3</h2>
-<p>首先使用 Anaconda3 建立一个 Python 版本为 3.6 的新环境。</p>
-<pre><code># Anaconda3 下载链接
-清华镜像: https://mirror.tuna.tsinghua.edu.cn/help/anaconda/
-官网链接: https://www.anaconda.com/distribution/#download-section
-
-# 新建 conda 环境
-conda create -n ENV_NAME python=3.6
-</code></pre>
-<p><strong>下面所有涉及 Python 的内容都会在该环境中进行</strong>，如果不在该环境中，切换至该环境的命令为 <code>conda activate ENV_NAME</code></p>
-<p>清华的链接里提供了替换镜像的方法，以便提高下载速度</p>
-<h2 id="2-visual-studio">2.  Visual Studio</h2>
-<p>安装 CUDA 的前提时安装有 Visual Studio，CUDA 9.0 支持 vs2010 - vs2019，我选择了 Visual Studio 2013 版，下载之后全部默认安装即可。</p>
-<pre><code># Visual Studio 2013 下载链接
-中文旗舰版：http://download.microsoft.com/download/0/7/5/0755898A-ED1B-4E11-BC04-6B9B7D82B1E4/VS2013_RTM_ULT_CHS.iso
-其他版本参考：https://blog.csdn.net/skykingf/article/details/12883655
-</code></pre>
-<h2 id="3-nvidia-驱动">3.  Nvidia 驱动</h2>
-<p>Nvidia 驱动包括 3 个，显卡驱动（版本无要求）、CUDA 9.0、以及 cuDNN 7.0.5。需要按照上述次序安装。<strong>要和服务器中的 CUDA 9.0 以及 cuDNN 7.1.2 对应，上述 Windows 版本为唯一选择，否则会报错</strong></p>
-<pre><code># 显卡驱动
-Nvidia 官网：https://www.nvidia.com/Download/index.aspx?lang=cn
-# CUDA 9.0
-选择对应的系统：https://developer.nvidia.com/cuda-90-download-archive
-# cuDNN 7.0.5
-可能需要先注册，选择：Download cuDNN v7.0.5 (Dec 5, 2017), for CUDA 9.0
-https://developer.nvidia.com/rdp/cudnn-archive
-</code></pre>
-<p>下载的显卡驱动与 CUDA 是安装的，直接默认安装，cuDNN 是一个压缩包，解压后将其中的 <code>bin</code>, <code>include</code>, <code>lib</code> 文件夹覆盖到 CUDA 的安装目录，默认安装即是 <code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</code></p>
-<h4 id="cuda-验证">CUDA 验证</h4>
-<p>安装完成后打开 CUDA 的例程文件夹，默认为 <code>C:\ProgramData\NVIDIA Corporation\CUDA Samples\v9.0</code> 选择对应 vs 版本的例程打开，在 vs 中右键 <code>build</code> 一下，无报错即可。（<strong>vs 要用管理员身份运行</strong>）</p>
-<h2 id="4-tensorflow-等">4.  TensorFlow 等</h2>
-<pre><code class="language-bash"># 安装 tensorflow-gpu 1.7
-# 优先使用 conda 安装，因为 conda 会考虑到依赖库之间的版本兼容性
-conda install tensorflow-gpu=1.7
-# 我安装的 conda 不知为何联网，只能换用 pip
-pip install tensorflow-gpu==1.7
-</code></pre>
-<p>安装完之后进入 Python 环境，测试 TensorFlow，<code>import tensorflow as tf</code></p>
-<p>有可能会出现下面的警告，这是 Numpy 版本不兼容的问题</p>
-<pre><code class="language-py">...\lib\site-packages\tensorflow\python\framework\dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
-  _np_qint8 = np.dtype([(&quot;qint8&quot;, np.int8, 1)])
-</code></pre>
-<p>解决这个问题需先查看 Numpy 的版本，然后决定是否替换。</p>
-<pre><code class="language-bash"># 查看 Numpy 版本
-pip show numpy
-# 更改为 1.14.5 （与服务器相同）
-pip install numpy==1.14.5
-</code></pre>
-<p>然后再进入 Python 环境，执行下面语句，能正常输出 GPU 信息并且无报错即可。</p>
-<pre><code class="language-python">import tensorflow as tf
-sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
-</code></pre>
+<figure data-type="image" tabindex="1"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210507144721.png" alt="image-20201018105107889" loading="lazy"></figure>
+<h2 id="远程操作">远程操作</h2>
+<p>疫情期间Teamviewer的远程体验可谓是一言难尽，后来换了新电脑还不让我登录了，Anydesk、向日葵等替代品用起来也不爽，后来发现了Todesk这个神器，使用体验非常棒，就把Teamviewer卸载了，走好不见。</p>
+<figure data-type="image" tabindex="2"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210507144812.png" alt="简单易用的Todesk" loading="lazy"></figure>
+<p>当然回到学校之后就不需要借助这些软件了，无论是远程电脑还是服务器都可以直接使用IP地址，实验室与寝室的ping值在1ms左右。远程Windows可以使用自带的RDP，用起来非常的流畅，有时候全屏之后会忘了自己在远程。实验室电脑在路由器下，可以在路由器后台设置静态IP和端口转发。Win10家庭版默认无法被远程，可以安装<a href="https://github.com/stascorp/rdpwrap">RDP Wrapper</a>这个工具开启被远程功能。服务器一般是Ubuntu系统，远程有两种解决方案：SSH和VNC，分别对应终端和GUI，用起来都很流畅。</p>
+<figure data-type="image" tabindex="3"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210507144819.png" alt="image-20201018104637994" loading="lazy"></figure>
+<p>注意：由于RDP的特性，远程时使用的OpenGL版本太老，跟本地使用的版本不一致，会导致一些软件奔溃，日常的软件极少碰到这个问题。</p>
+<h2 id="下载">下载</h2>
+<p>既然在教育网下自然要好好利用一下免费的IPV6资源了，之前还可以通过IPV6直连谷歌香港，现在不行了。目前最大的用处就是PT站了，教育网下有不少优质的PT站，可以用教育邮箱进行注册使用。实测热门资源也能够基本跑满我千兆的带宽。</p>
+<figure data-type="image" tabindex="4"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210507144832.png" alt="image-20201018105814128" loading="lazy"></figure>
+<p>除了PT站之外正常下载东西也是非常快的，前几天下载原神能维持在100M/s左右，11G流量分分钟就用完了。</p>
+<h2 id="数据传输">数据传输</h2>
+<p>经常需要在实验室电脑和寝室笔记本之间传输数据（主要是看剧），直接在远程的时候复制粘贴不是那么方便，买个NAS也不太合适，所以我把笔记本的文件夹共享了出来，可以在校园网内访问。共享的方法有很多，Windows系统就自带了SMB和FTP两种分享方式，不过这两个功能做的太复杂还一股咖喱味，不太好用。找了一下发现Filezila的FTP功能非常方便，能很方便的设置权限和速度，就用Filezila在笔记本上搭了一个FTP服务器。实验室电脑端用的是Raidrive这个软件将FTP文件夹映射成带盘符的网络驱动器，映射之后这个文件夹就能跟本地文件一样进行预览打开等操作了，比系统自带的映射要好用很多。安卓端只有视频需求，所以用的是nplayer，如果有文件传输需求，还有一些软件可以做到。实测在Filezila不设置限速的情况下可以跑满带宽，100M/s已经快赶上机械硬盘的速度了。最重要的是，FTP可以共享我的PT下载文件夹，可以躺在床上看电脑上的视频了。</p>
+<figure data-type="image" tabindex="5"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210507144844.png" alt="image-20201018110256887" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://cdn.jsdelivr.net/gh/TianYang-TY/myPic/20210507144850.jpg" alt="Screenshot_2020-10-18-11-05-05-433_com.newin.npla" loading="lazy"></figure>
+<h2 id="总结">总结</h2>
+<p>教育网下的网络环境可能有些特殊，既然学校提供了这么好的网络资源，不用起来太可惜了，嘿嘿嘿。</p>
 
                 </div>
             </article>
@@ -176,8 +141,8 @@ sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
         
             <div class="next-post">
                 <div class="next gt-c-content-color-first">下一篇</div>
-                <a href="https://yangt.me/post/protect-server-under-ssh-cracking/" class="post-title gt-a-link">
-                    服务器被SSH暴力破解解决方案
+                <a href="https://yangt.me/post/freesurfer-use/" class="post-title gt-a-link">
+                    Freesurfer操作文档
                 </a>
             </div>
         

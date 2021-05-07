@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://yangt.me</id>
     <title>Yang&apos;s blog</title>
-    <updated>2021-04-30T07:47:44.155Z</updated>
+    <updated>2021-05-07T06:52:29.476Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://yangt.me"/>
     <link rel="self" href="https://yangt.me/atom.xml"/>
@@ -52,6 +52,17 @@
         <summary type="html"><![CDATA[<p>本文记录电脑中基于 VSCode 进行 Python 开发环境的流程。初上手 Python 时，Pycharm 是一个非常便利的 IDE，随着使用频率的增加，愈发被 Pycharm 超慢的启动速度困扰，于是转入 VSCode。VSCode 定位是一个文本编辑器，并不是跟 Pycharm 一样的 IDE，得益于丰富的插件支持，可以自定义出一套满足自己需求的开发环境。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>本文记录电脑中基于 VSCode 进行 Python 开发环境的流程。初上手 Python 时，Pycharm 是一个非常便利的 IDE，随着使用频率的增加，愈发被 Pycharm 超慢的启动速度困扰，于是转入 VSCode。VSCode 定位是一个文本编辑器，并不是跟 Pycharm 一样的 IDE，得益于丰富的插件支持，可以自定义出一套满足自己需求的开发环境。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[上下对等千兆教育网冲浪指南]]></title>
+        <id>https://yangt.me/post/school-network/</id>
+        <link href="https://yangt.me/post/school-network/">
+        </link>
+        <updated>2020-10-18T06:39:12.000Z</updated>
+        <summary type="html"><![CDATA[<p>坐标北方某大学，学校内教学楼WiFi全覆盖，寝室和实验室都有网口，实测速率可以达到上下对等的千兆速率，校内数据传输不计费，在有线网下会分配到一个固定的IP地址，这么棒的资源肯定要利用起来。教育网与普通运营商网很大的不同是学校内相当于一个大路由器，接入学校网络的设备可以自由访问校内IP地址，校外设备无法访问，我下面进行的操作也很大程度上基于此条件，也不需要购买服务器进行内网穿透。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>坐标北方某大学，学校内教学楼WiFi全覆盖，寝室和实验室都有网口，实测速率可以达到上下对等的千兆速率，校内数据传输不计费，在有线网下会分配到一个固定的IP地址，这么棒的资源肯定要利用起来。教育网与普通运营商网很大的不同是学校内相当于一个大路由器，接入学校网络的设备可以自由访问校内IP地址，校外设备无法访问，我下面进行的操作也很大程度上基于此条件，也不需要购买服务器进行内网穿透。</p>
 ]]></content>
     </entry>
     <entry>
@@ -109,17 +120,6 @@
         <summary type="html"><![CDATA[<p>以 Windows 7 SP1 专业版系统为例，进行 Windows 下 TensorFlow GPU 环境的配置，尽可能复现课题组 Ubuntu 服务器中的版本。</p>
 ]]></summary>
         <content type="html"><![CDATA[<p>以 Windows 7 SP1 专业版系统为例，进行 Windows 下 TensorFlow GPU 环境的配置，尽可能复现课题组 Ubuntu 服务器中的版本。</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[服务器被SSH暴力破解解决方案]]></title>
-        <id>https://yangt.me/post/protect-server-under-ssh-cracking/</id>
-        <link href="https://yangt.me/post/protect-server-under-ssh-cracking/">
-        </link>
-        <updated>2019-07-07T14:40:43.000Z</updated>
-        <summary type="html"><![CDATA[<p>服务器端使用Debian 9×64系统，发现大量不存在的用户名登陆失败记录，于是使用Fail2ban进行IP封禁。</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>服务器端使用Debian 9×64系统，发现大量不存在的用户名登陆失败记录，于是使用Fail2ban进行IP封禁。</p>
 ]]></content>
     </entry>
 </feed>
